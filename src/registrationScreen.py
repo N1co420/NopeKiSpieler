@@ -13,7 +13,7 @@ def main_account_screen():
     Label(text="").pack()
 
     # create a login Button
-    Button(text="login", height="2", width="30").pack()
+    Button(text="login", height="2", width="30", command=login).pack()
     Label(text="").pack()
 
     # create a reigster Button
@@ -45,6 +45,14 @@ def register():
     # set register button
     Button(register_screen, text="Register", width=10, height=1, bg="blue").pack()
 
+def login():
+    login_screen = Toplevel(main_screen)
+    login_screen.title("Login")
+    login_screen.geometry("300x250")
+    Label(login_screen, text="Please enter details below to login").pack()
+    Label(login_screen, text="").pack()
+ 
+   
 
 def main():
     
