@@ -1,6 +1,13 @@
 # This File is the implementation of a screen for user registration
 from tkinter import*
 import json
+ 
+# set global variables
+ 
+global username
+global password
+global username_entry
+global password_entry
 
 def main_account_screen():
     global main_screen
@@ -20,6 +27,7 @@ def main_account_screen():
     Button(text="Register", height="2", width="30", command=register).pack()
 
 def register():
+    global register_screen
     register_screen = Toplevel(main_screen)
     register_screen.title("Register")
     register_screen.geometry("300x250")
@@ -45,6 +53,28 @@ def register():
     # set register button
     Button(register_screen, text="Register", width=10, height=1, bg="blue").pack()
 
+def register_user(): # placeholder function to register a user
+
+# get username and password
+    username_info = username.get()
+    password_info = password.get()
+
+# Open file in write mode
+    file = open(username_info, "w")
+
+# write username and password information into file
+    file.write(username_info + "\n")
+    file.write(password_info)
+    file.close()
+
+    username_entry.delete(0, END)
+    password_entry.delete(0, END)
+
+# set a label for showing success information on screen 
+    
+    Label(register_screen, text="Registration Success", fg="green", font=("calibri", 11)).pack()
+
+
 def login():
     login_screen = Toplevel(main_screen)
     login_screen.title("Login")
@@ -57,8 +87,6 @@ def login():
 def main():
     
     main_account_screen()
-
-    # register()
 
     main_screen.mainloop()
 
