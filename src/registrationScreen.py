@@ -25,6 +25,7 @@ def main_account_screen():
 
     # create a reigster Button
     Button(text="Register", height="2", width="30", command=register).pack()
+    Label(text="").pack()
 
 def register():
     global register_screen
@@ -52,8 +53,6 @@ def register():
 
     # set register button
     Button(register_screen, text="Register", width=10, height=1, bg="blue", command = register_user).pack()
-
-    Button(text="Login", height="2", width="30", command = login).pack()
 
 def register_user(): # placeholder function to register a user
 
