@@ -1,5 +1,6 @@
 # This File is the implementation of a screen for user registration
 from tkinter import*
+import requests
 import json
  
 # set global variables
@@ -8,6 +9,9 @@ global username
 global password
 global username_entry
 global password_entry
+
+BASE_URL = "http://your-api-url.com"
+
 
 def main_account_screen():
     global main_screen
@@ -28,6 +32,11 @@ def main_account_screen():
     Label(text="").pack()
 
 def register():
+    global username
+    global password
+    global username_entry
+    global password_entry
+
     global register_screen
     register_screen = Toplevel(main_screen)
     register_screen.title("Register")
@@ -54,33 +63,27 @@ def register():
     # set register button
     Button(register_screen, text="Register", width=10, height=1, bg="blue", command = register_user).pack()
 
-def register_user(): # placeholder function to register a user
 
-# get username and password
+def register_user():
+    # get username and password
     username_info = username.get()
     password_info = password.get()
 
-# Open file in write mode
-    file = open(username_info, "w")
+    # make a POST request to register a new user
+    url = BASE_URL + "/register"
+    payload = {"username": username_info, "password": password_info}
+    response = requests.post(url, json=payload)
 
-# write username and password information into file
-    file.write(username_info + "\n")
-    file.write(password_info)
-    file.close()
-
-    username_entry.delete(0, END)
-    password_entry.delete(0, END)
-
-# set a label for showing success information on screen 
-    
-    Label(register_screen, text="Registration Success", fg="green", font=("calibri", 11)).pack()
-
-
-def login_verification(): # placeholder
-    print("working...")
+    if response.status_code == 200:
+        # show success message on screen
+        Label(register_screen, text="Registration Success", fg="green", font=("calibri", 11)).pack()
+    else:
+        # show error message on screen
+        Label(register_screen, text="Registration Failed", fg="red", font=("calibri", 11)).pack()
 
 
 def login():
+    global login_screen
     login_screen = Toplevel(main_screen)
     login_screen.title("Login")
     login_screen.geometry("300x250")
@@ -104,6 +107,22 @@ def login():
     Label(login_screen, text="").pack()
     Button(login_screen, text="Login", width=10, height=1, command=login_verification).pack()
    
+def login_verification():
+    # get username and password
+    username_info = username_verify.get()
+    password_info = password_verify.get()
+
+    # make a POST request to verify login credentials
+    url = BASE_URL + "/login"
+    payload = {"username": username_info, "password": password_info}
+    response = requests.post(url, json=payload)
+
+    if response.status_code == 200:
+        # show success message on screen
+        Label(login_screen, text="Login Success", fg="green", font=("calibri", 11)).pack()
+    else:
+        # show error message on screen
+        Label(login_screen, text="Login Failed", fg="red", font=("calibri", 11)).pack()
 
 def main():
     
