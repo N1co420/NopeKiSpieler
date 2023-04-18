@@ -76,11 +76,6 @@ def register():
     # set register button
     Button(register_screen, text="Register", width=10, height=1, bg="blue", command = register_user).pack()
 
-
-def register_user():
-    print("user registered")
-
-
 def login():
     global login_screen
     login_screen = Toplevel(main_screen)
@@ -106,8 +101,11 @@ def login():
     Button(login_screen, text="Login", width=10, height=1, command=login_verification).pack()
    
 def login_verification():
-    print("yes")
+   print("test")
+    
 
+def register_user():
+    print("test")
 
 def main():
     
