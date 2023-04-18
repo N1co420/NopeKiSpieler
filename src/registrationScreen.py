@@ -10,7 +10,7 @@ global password
 global username_entry
 global password_entry
 
-BASE_URL = "http://your-api-url.com"
+BASE_URL = "https://nope-server.azurewebsites.net/"
 
 
 def main_account_screen():
