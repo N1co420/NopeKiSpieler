@@ -10,9 +10,6 @@ global password
 global username_entry
 global password_entry
 
-BASE_URL = "https://nope-server.azurewebsites.net/"
-
-
 def main_account_screen():
     global main_screen
     main_screen = Tk() # create the GUI window
@@ -40,23 +37,39 @@ def register():
     global register_screen
     register_screen = Toplevel(main_screen)
     register_screen.title("Register")
-    register_screen.geometry("300x250")
+    register_screen.geometry("300x300")
 
     # set text variables
     username = StringVar()
     password = StringVar()
+    firstname = StringVar()
+    lastname = StringVar()
 
     # set username label and entry
     Label(register_screen, text="Please enter details below", bg="blue").pack()
     Label(register_screen, text="").pack()
+    username_lable = Label(register_screen, text="username")
+    username_lable.pack()
     username_entry = Entry(register_screen, textvariable=username)
     username_entry.pack()
 
     # set password label and entry
-    password_lable = Label(register_screen, text="Password * ")
+    password_lable = Label(register_screen, text="password * ")
     password_lable.pack()
     password_entry = Entry(register_screen, textvariable=password, show='*')
     password_entry.pack()
+
+    # set password label and entry
+    firstname_lable = Label(register_screen, text="firstname  ")
+    firstname_lable.pack()
+    firstname_entry = Entry(register_screen, textvariable=firstname)
+    firstname_entry.pack()
+
+    # set password label and entry
+    lastname_lable = Label(register_screen, text="lastname  ")
+    lastname_lable.pack()
+    lastname_entry = Entry(register_screen, textvariable=lastname, show='*')
+    lastname_entry.pack()
 
     Label(register_screen, text="").pack()
 
@@ -65,21 +78,7 @@ def register():
 
 
 def register_user():
-    # get username and password
-    username_info = username.get()
-    password_info = password.get()
-
-    # make a POST request to register a new user
-    url = BASE_URL + "/register"
-    payload = {"username": username_info, "password": password_info}
-    response = requests.post(url, json=payload)
-
-    if response.status_code == 200:
-        # show success message on screen
-        Label(register_screen, text="Registration Success", fg="green", font=("calibri", 11)).pack()
-    else:
-        # show error message on screen
-        Label(register_screen, text="Registration Failed", fg="red", font=("calibri", 11)).pack()
+    print("user registered")
 
 
 def login():
@@ -95,7 +94,6 @@ def login():
  
     username_verify = StringVar()
     password_verify = StringVar()
- 
    
     Label(login_screen, text="Username * ").pack()
     username_login_entry = Entry(login_screen, textvariable=username_verify)
@@ -108,21 +106,8 @@ def login():
     Button(login_screen, text="Login", width=10, height=1, command=login_verification).pack()
    
 def login_verification():
-    # get username and password
-    username_info = username_verify.get()
-    password_info = password_verify.get()
+    print("yes")
 
-    # make a POST request to verify login credentials
-    url = BASE_URL + "/login"
-    payload = {"username": username_info, "password": password_info}
-    response = requests.post(url, json=payload)
-
-    if response.status_code == 200:
-        # show success message on screen
-        Label(login_screen, text="Login Success", fg="green", font=("calibri", 11)).pack()
-    else:
-        # show error message on screen
-        Label(login_screen, text="Login Failed", fg="red", font=("calibri", 11)).pack()
 
 def main():
     
