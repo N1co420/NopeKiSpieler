@@ -62,7 +62,7 @@ def register():
 
     Label(register_screen, text="").pack()
 
-    register_data = transform2json_data(username_entry, password_entry, firstname_entry, lastname_lable)
+    register_data = transform2json_data(username_entry, password_entry, firstname_entry, lastname_entry)
 
     # set register button
     Button(register_screen, text="Register", width=10, height=1, bg="blue", command = register_user(register_data)).pack()
