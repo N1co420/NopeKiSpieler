@@ -4,11 +4,6 @@ import requests
 import json
  
 # set global variables
- 
-global username
-global password
-global username_entry
-global password_entry
 
 def main_account_screen():
     global main_screen
@@ -29,12 +24,7 @@ def main_account_screen():
     Label(text="").pack()
 
 def register():
-    global username
-    global password
-    global username_entry
-    global password_entry
-
-    global register_screen
+    register_screen
     register_screen = Toplevel(main_screen)
     register_screen.title("Register")
     register_screen.geometry("300x300")
@@ -77,15 +67,12 @@ def register():
     Button(register_screen, text="Register", width=10, height=1, bg="blue", command = register_user).pack()
 
 def login():
-    global login_screen
+    login_screen
     login_screen = Toplevel(main_screen)
     login_screen.title("Login")
     login_screen.geometry("300x250")
     Label(login_screen, text="Please enter details below to login").pack()
     Label(login_screen, text="").pack()
-
-    global username_verify
-    global password_verify
  
     username_verify = StringVar()
     password_verify = StringVar()
@@ -100,12 +87,31 @@ def login():
     Label(login_screen, text="").pack()
     Button(login_screen, text="Login", width=10, height=1, command=login_verification).pack()
    
-def login_verification():
-   print("test")
+def login_verification(username, password):
+    # Call the login_verification function from the register_login_User module
+    result = login_verification(username, password)
     
+    if result:
+        # Login successful, do something here
+        print("login yes")
+        pass
+    else:
+        # Login failed, display error message to the user
+        #error_label.config(text="Invalid username or password")
+        print("error")
 
-def register_user():
-    print("test")
+def register_user(username, password, firstname, lastname):
+    # Call the register_user function from the register_login_User module
+    result = register_user(username, password, firstname, lastname)
+    
+    if result:
+        # Registration successful, do something here
+        print("success")
+        pass
+    else:
+        # Registration failed, display error message to the user
+        # error_label.config(text="Username already exists")
+        print("error")
 
 def main():
     
