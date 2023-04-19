@@ -1,7 +1,7 @@
 import requests
 
 # This function sends a POST request to register a new user with the server
-def register_user(username, password, firstname, lastname):
+def register(username, password, firstname, lastname):
     # Set the endpoint URL for registration
     url = "https://nope-server.azurewebsites.net/api/auth/register"
     # Set the JSON data to send in the request body
@@ -56,8 +56,8 @@ def call_login():
 # This function demonstrates how to call the register_user function and handle the result
 def call_register():
     # Attempt to register a new test account
-    result = register_user("demicas", "552000", "nico", "huebner")
+    result = register("demicas", "552000", "nico", "huebner")
     # Print the result of the registration attempt
     print(result)
 
-call_login()
+
