@@ -91,9 +91,9 @@ def login():
     
     Button(login_screen, text="Login", width=10, height=1, command=login_verification(login_data)).pack()
    
-def login_verification(username, password):
+def login_verification(login_data):
     # Call the login_verification function from the register_login_User module
-    result = register_login_User.login(username, password)
+    result = register_login_User.login(login_data)
     
     if result:
         # Login successful, do something here
@@ -104,9 +104,9 @@ def login_verification(username, password):
         #error_label.config(text="Invalid username or password")
         print("error")
 
-def register_user(username, password, firstname, lastname):
+def register_user(registration_data):
     # Call the register_user function from the register_login_User module
-    result = register_login_User.register(username, password, firstname, lastname)
+    result = register_login_User.register(registration_data)
     
     if result:
         # Registration successful, do something here
