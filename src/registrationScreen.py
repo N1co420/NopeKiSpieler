@@ -1,6 +1,6 @@
 # This File is the implementation of a screen for user registration
 from tkinter import*
-import requests
+import register_login_User
 import json
  
 # set global variables
@@ -24,7 +24,6 @@ def main_account_screen():
     Label(text="").pack()
 
 def register():
-    register_screen
     register_screen = Toplevel(main_screen)
     register_screen.title("Register")
     register_screen.geometry("300x300")
@@ -63,11 +62,12 @@ def register():
 
     Label(register_screen, text="").pack()
 
+    register_data = transform2json_data(username_entry, password_entry, firstname_entry, lastname_lable)
+
     # set register button
-    Button(register_screen, text="Register", width=10, height=1, bg="blue", command = register_user).pack()
+    Button(register_screen, text="Register", width=10, height=1, bg="blue", command = register_user(register_data)).pack()
 
 def login():
-    login_screen
     login_screen = Toplevel(main_screen)
     login_screen.title("Login")
     login_screen.geometry("300x250")
@@ -76,6 +76,8 @@ def login():
  
     username_verify = StringVar()
     password_verify = StringVar()
+
+    login_data = transform2json_data(username_verify, password_verify)
    
     Label(login_screen, text="Username * ").pack()
     username_login_entry = Entry(login_screen, textvariable=username_verify)
@@ -85,11 +87,13 @@ def login():
     password__login_entry = Entry(login_screen, textvariable=password_verify, show= '*')
     password__login_entry.pack()
     Label(login_screen, text="").pack()
-    Button(login_screen, text="Login", width=10, height=1, command=login_verification).pack()
+
+    
+    Button(login_screen, text="Login", width=10, height=1, command=login_verification(login_data)).pack()
    
 def login_verification(username, password):
     # Call the login_verification function from the register_login_User module
-    result = login_verification(username, password)
+    result = register_login_User.login(username, password)
     
     if result:
         # Login successful, do something here
@@ -102,7 +106,7 @@ def login_verification(username, password):
 
 def register_user(username, password, firstname, lastname):
     # Call the register_user function from the register_login_User module
-    result = register_user(username, password, firstname, lastname)
+    result = register_login_User.register(username, password, firstname, lastname)
     
     if result:
         # Registration successful, do something here
@@ -112,6 +116,40 @@ def register_user(username, password, firstname, lastname):
         # Registration failed, display error message to the user
         # error_label.config(text="Username already exists")
         print("error")
+
+def transform2json_data(username_entry, password_entry, firstname_entry=None, lastname_lable=None):
+    """
+    A function to transform user input data into a JSON string.
+
+    Args:
+        username_entry (Tkinter.Entry): An Entry widget for the username.
+        password_entry (Tkinter.Entry): An Entry widget for the password.
+        firstname_entry (Optional[Tkinter.Entry], optional): An Entry widget for the firstname. Defaults to None.
+        lastname_lable (Optional[Tkinter.Label], optional): A Label widget for the lastname. Defaults to None.
+
+    Returns:
+        str: A JSON string containing the username, password, firstname, and lastname (if provided).
+
+    """
+    # Get the values of the username and password entries
+    username = username_entry.get()
+    password = password_entry.get()
+
+    # Create a dictionary with the username and password values
+    data = {'username': username, 'password': password}
+
+    # Check if firstname and lastname widgets were provided
+    if firstname_entry and lastname_lable:
+        # Get the values of the firstname and lastname widgets
+        firstname = firstname_entry.get()
+        lastname = lastname_lable.get()
+        # Add the firstname and lastname values to the data dictionary
+        data['firstname'] = firstname
+        data['lastname'] = lastname
+
+    # Convert the data dictionary to a JSON string and return it
+    json_data = json.dumps(data)
+    return json_data
 
 def main():
     

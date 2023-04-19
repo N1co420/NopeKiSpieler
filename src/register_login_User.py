@@ -1,16 +1,9 @@
 import requests
 
 # This function sends a POST request to register a new user with the server
-def register(username, password, firstname, lastname):
+def register(json_data):
     # Set the endpoint URL for registration
     url = "https://nope-server.azurewebsites.net/api/auth/register"
-    # Set the JSON data to send in the request body
-    json_data = {
-        "username": username,
-        "password": password,
-        "firstname": firstname,
-        "lastname": lastname
-    }
     # Send the POST request to the server and store the response
     response = requests.post(url, json=json_data)
     # Check if the response status code indicates successful registration
@@ -23,14 +16,10 @@ def register(username, password, firstname, lastname):
         return f"Registration failed with status code {response.status_code}"
 
 # This function sends a POST request to log in a user with the server
-def login(username, password):
+def login(json_data):
     # Set the endpoint URL for login
     url = "https://nope-server.azurewebsites.net/api/auth/login"
-    # Set the JSON data to send in the request body
-    json_data = {
-        "username": username,
-        "password": password
-    }
+    
     # Send the POST request to the server and store the response
     response = requests.post(url, json=json_data)
     # Check if the response status code indicates successful login
