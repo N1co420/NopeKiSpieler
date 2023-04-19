@@ -65,7 +65,8 @@ def register():
     register_data = transform2json_data(username_entry, password_entry, firstname_entry, lastname_entry)
 
     # set register button
-    Button(register_screen, text="Register", width=10, height=1, bg="blue", command = register_user(register_data)).pack()
+    Button(register_screen, text="Register", width=10, height=1, bg="blue").pack()
+    #Button(register_screen, text="Register", width=10, height=1, bg="blue", command = register_user(register_data)).pack()
 
 def login():
     login_screen = Toplevel(main_screen)
@@ -88,8 +89,8 @@ def login():
     password__login_entry.pack()
     Label(login_screen, text="").pack()
 
-    
-    Button(login_screen, text="Login", width=10, height=1, command=login_verification(login_data)).pack()
+    Button(login_screen, text="Login", width=10, height=1).pack()
+    #Button(login_screen, text="Login", width=10, height=1, command=login_verification(login_data)).pack()
    
 def login_verification(login_data):
     # Call the login_verification function from the register_login_User module
@@ -150,6 +151,10 @@ def transform2json_data(username_entry, password_entry, firstname_entry=None, la
     # Convert the data dictionary to a JSON string and return it
     json_data = json.dumps(data)
     return json_data
+
+
+def landingpage():
+    print("landing page")
 
 def main():
     
