@@ -77,8 +77,6 @@ def login():
  
     username_verify = StringVar()
     password_verify = StringVar()
-
-    login_data = transform2json_data(username_verify, password_verify)
    
     Label(login_screen, text="Username * ").pack()
     username_login_entry = Entry(login_screen, textvariable=username_verify)
@@ -89,11 +87,12 @@ def login():
     password__login_entry.pack()
     Label(login_screen, text="").pack()
 
-    Button(login_screen, text="Login", width=10, height=1, command= lambda: login_verification(transform2json_data(username_verify, password_verify))).pack()
+    Button(login_screen, text="Login", width=10, height=1, command= lambda: login_verification(transform2json_data(username_login_entry, password__login_entry))).pack()
    
 def login_verification(login_data):
     # Call the login_verification function from the register_login_User module
     result = register_login_User.login(login_data)
+    test(login_data)
     
     if result:
         # Login successful, do something here
@@ -102,7 +101,7 @@ def login_verification(login_data):
     else:
         # Login failed, display error message to the user
         #error_label.config(text="Invalid username or password")
-        print("error")
+        print(result)
 
 def register_user(registration_data):
     # Call the register_user function from the register_login_User module
@@ -110,7 +109,7 @@ def register_user(registration_data):
     
     if result:
         # Registration successful, do something here
-        print("success")
+        landingpage()
         pass
     else:
         # Registration failed, display error message to the user
@@ -136,7 +135,7 @@ def transform2json_data(username_entry, password_entry, firstname_entry=None, la
     password = password_entry.get()
 
     # Create a dictionary with the username and password values
-    data = {'username': username, 'password': password}
+    data = {"username": username, "password": password}
 
     # Check if firstname and lastname widgets were provided
     if firstname_entry and lastname_entry:
@@ -144,8 +143,8 @@ def transform2json_data(username_entry, password_entry, firstname_entry=None, la
         firstname = firstname_entry.get()
         lastname = lastname_entry.get()
         # Add the firstname and lastname values to the data dictionary
-        data['firstname'] = firstname
-        data['lastname'] = lastname
+        data["firstname"] = firstname
+        data["lastname"] = lastname
 
     # Convert the data dictionary to a JSON string and return it
     json_data = json.dumps(data)

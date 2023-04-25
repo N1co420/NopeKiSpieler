@@ -1,4 +1,5 @@
 import requests
+import registrationScreen
 
 # This function sends a POST request to register a new user with the server
 def register(json_data):
@@ -19,7 +20,9 @@ def register(json_data):
 def login(json_data):
     # Set the endpoint URL for login
     url = "https://nope-server.azurewebsites.net/api/auth/login"
-    
+
+
+    print(json_data)
     # Send the POST request to the server and store the response
     response = requests.post(url, json=json_data)
     # Check if the response status code indicates successful login
@@ -29,13 +32,20 @@ def login(json_data):
         access_token = json_response["accessToken"]
         return access_token
     else:
-        # Return None if login failed
+        print(response)
         return None
 
 # This function demonstrates how to call the login function and handle the result
 def call_login():
     # Attempt to log in with the test account
-    access_token = login("demicas", "552000")
+    
+    # data = {"username": "nico", "password": "654321"}
+    username ="nico"
+    password = "654321"
+    data = registrationScreen.transform2json_data(username, password)
+
+    # data = {"username": "Jan", "password": "123456"}
+    access_token = login(data)
     # Check if login was successful
     if access_token:
         print("Login successful!")
@@ -45,8 +55,11 @@ def call_login():
 # This function demonstrates how to call the register_user function and handle the result
 def call_register():
     # Attempt to register a new test account
-    result = register("demicas", "552000", "nico", "huebner")
+    
+    data = {"username": "nico", "password": "654321", "firstname": "nico", "lastname": "huebner"}
+
+    result = register(data)
     # Print the result of the registration attempt
     print(result)
 
-
+call_login()
