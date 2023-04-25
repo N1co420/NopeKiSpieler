@@ -23,6 +23,9 @@ def main_account_screen():
     Button(text="Register", height="2", width="30", command=register).pack()
     Label(text="").pack()
 
+def test(register_data):
+    print(register_data)
+
 def register():
     register_screen = Toplevel(main_screen)
     register_screen.title("Register")
@@ -57,16 +60,13 @@ def register():
     # set password label and entry
     lastname_lable = Label(register_screen, text="lastname  ")
     lastname_lable.pack()
-    lastname_entry = Entry(register_screen, textvariable=lastname, show='*')
+    lastname_entry = Entry(register_screen, textvariable=lastname)
     lastname_entry.pack()
 
     Label(register_screen, text="").pack()
 
-    register_data = transform2json_data(username_entry, password_entry, firstname_entry, lastname_entry)
-
     # set register button
-    Button(register_screen, text="Register", width=10, height=1, bg="blue").pack()
-    #Button(register_screen, text="Register", width=10, height=1, bg="blue", command = register_user(register_data)).pack()
+    Button(register_screen, text="Register now", width=10, height=1, bg="blue", command = lambda: register_user(transform2json_data(username_entry, password_entry, firstname_entry, lastname_entry))).pack()
 
 def login():
     login_screen = Toplevel(main_screen)
@@ -89,8 +89,7 @@ def login():
     password__login_entry.pack()
     Label(login_screen, text="").pack()
 
-    Button(login_screen, text="Login", width=10, height=1).pack()
-    #Button(login_screen, text="Login", width=10, height=1, command=login_verification(login_data)).pack()
+    Button(login_screen, text="Login", width=10, height=1, command= lambda: login_verification(transform2json_data(username_verify, password_verify))).pack()
    
 def login_verification(login_data):
     # Call the login_verification function from the register_login_User module
@@ -118,7 +117,7 @@ def register_user(registration_data):
         # error_label.config(text="Username already exists")
         print("error")
 
-def transform2json_data(username_entry, password_entry, firstname_entry=None, lastname_lable=None):
+def transform2json_data(username_entry, password_entry, firstname_entry=None, lastname_entry=None):
     """
     A function to transform user input data into a JSON string.
 
@@ -140,10 +139,10 @@ def transform2json_data(username_entry, password_entry, firstname_entry=None, la
     data = {'username': username, 'password': password}
 
     # Check if firstname and lastname widgets were provided
-    if firstname_entry and lastname_lable:
+    if firstname_entry and lastname_entry:
         # Get the values of the firstname and lastname widgets
         firstname = firstname_entry.get()
-        lastname = lastname_lable.get()
+        lastname = lastname_entry.get()
         # Add the firstname and lastname values to the data dictionary
         data['firstname'] = firstname
         data['lastname'] = lastname
