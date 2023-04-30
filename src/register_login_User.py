@@ -1,11 +1,12 @@
 import requests
-import registrationScreen
+import json
+
 
 # This function sends a POST request to register a new user with the server
 def register(json_data):
     # Set the endpoint URL for registration
     url = "https://nope-server.azurewebsites.net/api/auth/register"
-    # Send the POST request to the server and store the response
+    # Send the POST request to the server and store the respons
     response = requests.post(url, json=json_data)
     # Check if the response status code indicates successful registration
     if response.status_code == 201:
@@ -17,14 +18,12 @@ def register(json_data):
         return f"Registration failed with status code {response.status_code}"
 
 # This function sends a POST request to log in a user with the server
-def login(json_data):
+def login(data):
     # Set the endpoint URL for login
     url = "https://nope-server.azurewebsites.net/api/auth/login"
-
-
-    print(json_data)
+    # compare_data(json_data)
     # Send the POST request to the server and store the response
-    response = requests.post(url, json=json_data)
+    response = requests.post(url, json=data)
     # Check if the response status code indicates successful login
     if response.status_code == 200:
         # Extract the access token from the response JSON
@@ -36,21 +35,30 @@ def login(json_data):
         return None
 
 # This function demonstrates how to call the login function and handle the result
-def call_login():
-    # Attempt to log in with the test account
-    
-    # data = {"username": "nico", "password": "654321"}
-    username ="nico"
-    password = "654321"
-    data = registrationScreen.transform2json_data(username, password)
+def compare_data(data):
+    user = {"username": "nico", "password": "654321"}
 
-    # data = {"username": "Jan", "password": "123456"}
-    access_token = login(data)
-    # Check if login was successful
-    if access_token:
-        print("Login successful!")
+    dict2 = json.loads(data)
+
+    # compare dictionaries
+    if user == dict2:
+        print("JSON data is same")
     else:
-        print("Login failed.")
+        print("JSON data is different")
+
+def call_login():
+    user = {"username": "nico", "password": "654321"}
+    result = login(user)
+
+    if result:
+        # Login successful, do something here
+        print(result)
+        pass
+    else:
+        # Login failed, display error message to the user
+        #error_label.config(text="Invalid username or password")
+        print(result)
+
 
 # This function demonstrates how to call the register_user function and handle the result
 def call_register():

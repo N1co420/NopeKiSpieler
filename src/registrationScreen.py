@@ -1,7 +1,7 @@
 # This File is the implementation of a screen for user registration
 from tkinter import*
-import register_login_User
 import json
+import register_login_User
  
 # set global variables
 
@@ -16,17 +16,17 @@ def main_account_screen():
     Label(text="").pack()
 
     # create a login Button
-    Button(text="login", height="2", width="30", command=login).pack()
+    Button(text="login", height="2", width="30", command=login_gui).pack()
     Label(text="").pack()
 
     # create a reigster Button
-    Button(text="Register", height="2", width="30", command=register).pack()
+    Button(text="Register", height="2", width="30", command=register_gui).pack()
     Label(text="").pack()
 
 def test(register_data):
     print(register_data)
 
-def register():
+def register_gui():
     register_screen = Toplevel(main_screen)
     register_screen.title("Register")
     register_screen.geometry("300x300")
@@ -68,7 +68,7 @@ def register():
     # set register button
     Button(register_screen, text="Register now", width=10, height=1, bg="blue", command = lambda: register_user(transform2json_data(username_entry, password_entry, firstname_entry, lastname_entry))).pack()
 
-def login():
+def login_gui():
     login_screen = Toplevel(main_screen)
     login_screen.title("Login")
     login_screen.geometry("300x250")
@@ -96,7 +96,8 @@ def login_verification(login_data):
     
     if result:
         # Login successful, do something here
-        print("login yes")
+        print("finally")
+        print(result)
         pass
     else:
         # Login failed, display error message to the user
@@ -147,8 +148,8 @@ def transform2json_data(username_entry, password_entry, firstname_entry=None, la
         data["lastname"] = lastname
 
     # Convert the data dictionary to a JSON string and return it
-    json_data = json.dumps(data)
-    return json_data
+    # json_data = json.dumps(data)
+    return data
 
 
 def landingpage():
