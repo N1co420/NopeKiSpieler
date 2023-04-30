@@ -66,7 +66,7 @@ def register_gui():
     Label(register_screen, text="").pack()
 
     # set register button
-    Button(register_screen, text="Register now", width=10, height=1, bg="blue", command = lambda: register_user(transform2json_data(username_entry, password_entry, firstname_entry, lastname_entry))).pack()
+    Button(register_screen, text="Register now", width=10, height=1, bg="blue", command = lambda: register_user(transform2dict(username_entry, password_entry, firstname_entry, lastname_entry))).pack()
 
 def login_gui():
     login_screen = Toplevel(main_screen)
@@ -87,7 +87,7 @@ def login_gui():
     password__login_entry.pack()
     Label(login_screen, text="").pack()
 
-    Button(login_screen, text="Login", width=10, height=1, command= lambda: login_verification(transform2json_data(username_login_entry, password__login_entry))).pack()
+    Button(login_screen, text="Login", width=10, height=1, command= lambda: login_verification(transform2dict(username_login_entry, password__login_entry))).pack()
    
 def login_verification(login_data):
     # Call the login_verification function from the register_login_User module
@@ -117,7 +117,7 @@ def register_user(registration_data):
         # error_label.config(text="Username already exists")
         print("error")
 
-def transform2json_data(username_entry, password_entry, firstname_entry=None, lastname_entry=None):
+def transform2dict(username_entry, password_entry, firstname_entry=None, lastname_entry=None):
     """
     A function to transform user input data into a JSON string.
 
@@ -128,7 +128,7 @@ def transform2json_data(username_entry, password_entry, firstname_entry=None, la
         lastname_lable (Optional[Tkinter.Label], optional): A Label widget for the lastname. Defaults to None.
 
     Returns:
-        str: A JSON string containing the username, password, firstname, and lastname (if provided).
+        str: A Dictionary containing the username, password, firstname, and lastname (if provided).
 
     """
     # Get the values of the username and password entries
@@ -148,7 +148,7 @@ def transform2json_data(username_entry, password_entry, firstname_entry=None, la
         data["lastname"] = lastname
 
     # Convert the data dictionary to a JSON string and return it
-    # json_data = json.dumps(data)
+    
     return data
 
 
