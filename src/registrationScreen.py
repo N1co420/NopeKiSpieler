@@ -110,6 +110,7 @@ def register_user(registration_data):
     
     if result:
         # Registration successful, do something here
+        print(registration_data)
         landingpage()
         pass
     else:

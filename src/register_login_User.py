@@ -69,5 +69,3 @@ def call_register():
     result = register(data)
     # Print the result of the registration attempt
     print(result)
-
-call_login()
