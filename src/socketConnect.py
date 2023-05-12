@@ -18,6 +18,14 @@ def connect_to_socketio_server(access_token):
     except socketio.exceptions.BadNamespaceError as e:
         print(f'Failed to connect to SocketIO server: {e}')
 
+#  Disconnect from the SocketIO server.
+def disconnect_from_socketio_server():
+    try:
+        sio.disconnect()
+    except socketio.exceptions.ConnectionError as e:
+        print(f'Failed to disconnect from SocketIO server: {e}')
+
+
 ## Creates a new tournament with the specified number of games
 # @param num_games The number of games to be included in the tournament
 def create_tournament(num_games):
@@ -101,8 +109,8 @@ def main():
 
     connect_to_socketio_server(result)
 
-    leave_tournament("clhkk3uhq0004p907sv4cgv1p")
 
+    disconnect_from_socketio_server()
     
 
 main()
