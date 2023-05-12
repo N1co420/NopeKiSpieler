@@ -34,17 +34,6 @@ def login(data):
         print(response)
         return None
 
-# This function demonstrates how to call the login function and handle the result
-def compare_data(data):
-    user = {"username": "nico", "password": "654321"}
-
-    dict2 = json.loads(data)
-
-    # compare dictionaries
-    if user == dict2:
-        print("JSON data is same")
-    else:
-        print("JSON data is different")
 
 def call_login():
     user = {"username": "nico", "password": "654321"}
@@ -53,11 +42,13 @@ def call_login():
     if result:
         # Login successful, do something here
         print(result)
-        pass
     else:
         # Login failed, display error message to the user
         #error_label.config(text="Invalid username or password")
         print(result)
+
+  
+    
 
 
 # This function demonstrates how to call the register_user function and handle the result
@@ -69,3 +60,4 @@ def call_register():
     result = register(data)
     # Print the result of the registration attempt
     print(result)
+
