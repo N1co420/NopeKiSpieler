@@ -9,7 +9,7 @@ def connect_to_socketio_server(access_token):
         # Connect to SocketIO server with access token
         
         # headers = {'Authorization': 'Bearer ' + access_token}
-        sio.connect("https://nope-server.azurewebsites.net", namespaces="/", auth={'token': access_token})
+        sio.connect("https://nope-server.azurewebsites.net", namespaces="/", auth={"token": access_token})
         # sio.connect('https://nope-server.azurewebsites.net', headers={'Authorization': 'Bearer ' + access_token})
 
         
@@ -35,15 +35,10 @@ def callback(data):
     print(data)
 
 @sio.on('list:tournaments')
-def socket_on(data):
-    print("list")
-    #print(data)
+def socket_on(list, namespace):
+    tournament_list(list)
 # Define the callback function
-def on_response(data):
-    # print and save data here
-    print("Response:", data)
-    # save data to a file or database
-    # ...
+
 
 # Function to create a tournament
 def create_tournament(num_games):
@@ -51,13 +46,38 @@ def create_tournament(num_games):
     print(response)
 
 # Function to join a tournament
-def join_tournament(): #tournament_id
-    response= sio.call("tournament:join", 'clh4zo1ke000gnx07b5hrzk8l' )
+def join_tournament(tournament_id): 
+    response= sio.call("tournament:join", tournament_id )
+    print(response)
+
+def start_tournamet():
+    response= sio.call("tournament:start")
     print(response)
 
 def leave_tournament():
     response = sio.call("tournament:leave")
     print(response)
+
+
+def tournament_list(data):
+
+    # Create an empty dictionary to store the tournament data
+    tournaments = {}
+
+    # Loop through each tournament dictionary in the list and add it to the tournaments dictionary using its ID as the key
+    for tournament in data:
+        tournaments[tournament['id']] = tournament
+
+    # Iterate through the tournaments dictionary and print each tournament's details
+    for i, (tournament_id, tournament_details) in enumerate(tournaments.items()):
+        players = ", ".join([player['username'] for player in tournament_details['players']])
+        print(f"{i+1}. Tournament ID: {tournament_id}")
+        print(f"Status: {tournament_details['status']}")
+        print(f"Players: {players}")
+        print("")
+
+    
+
 
 def main():
     user = {"username": "nico", "password": "654321"}
@@ -65,7 +85,9 @@ def main():
 
     connect_to_socketio_server(result)
     
-    join_tournament()
+    #create_tournament(3)
+    #start_tournamet()
+    join_tournament("clhkk20pa0002p907i4uxdca0")
     leave_tournament()
     #create_tournament(3)
 
