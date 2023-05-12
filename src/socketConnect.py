@@ -100,8 +100,19 @@ def callback(data):
     print(data)
 
 @sio.on('list:tournaments')
-def socket_on(list, namespace):
-    tournaments = tournament_list(list)
+def socket_tournament(list, namespace):
+    print("palceholder")
+    #tournaments = tournament_list(list)
+
+@sio.on("tournament:playerInfo")
+def socket_playerInfo(data, namespace):
+    print("Received tournament player info:")
+    print(f"Tournament ID: {data['tournamentId']}")
+    print(f"Current size: {data['currentSize']}")
+    print(f"Best of: {data['bestOf']}")
+    print("Players:")
+    for player in data['players']:
+        print(f" - ID: {player['id']}, username: {player['username']}")
 
 def main():
     user = {"username": "nico", "password": "654321"}
@@ -109,9 +120,10 @@ def main():
 
     connect_to_socketio_server(result)
 
-
-    disconnect_from_socketio_server()
+    #join_tournament("clhkhg4ik0000p907f5pedt3k")
     
+    join_tournament("clhkk20pa0002p907i4uxdca0")
+    #leave_tournament("clhkhg4ik0000p907f5pedt3k")
 
 main()
 
