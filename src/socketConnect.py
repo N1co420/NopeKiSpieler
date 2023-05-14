@@ -55,7 +55,7 @@ def join_tournament(tournament_id):
         print(f'Bad namespace error occurred: {e}')
 
 ## Starts a tournament with the specified ID
-def start_tournamet():
+def start_tournament():
     try:
         response = sio.call("tournament:start")
         callback(response)
@@ -93,6 +93,15 @@ def tournament_list(data):
         print(f"Players: {players}")
         print("")
     return tournaments
+
+def tournament_invite():
+    try:
+        response = sio.call("tournament:invite")
+        print("INVITE")
+        print(response)
+    except Exception as e:
+        print(f"Failed to invite to you tournament: {e}")
+
 
 ## Event handler for the SocketIO 'connect' event
 @sio.event
@@ -146,8 +155,6 @@ def main():
     result = register_login_User.login(user)
 
     connect_to_socketio_server(result)
-
-    create_tournament(3)
 
     leave_tournament()
 
