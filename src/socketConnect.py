@@ -1,6 +1,7 @@
 import socketio
 import requests
 import register_login_User
+import json
 
 ## Creates a new instance of the SocketIO client
 sio = socketio.Client()
@@ -31,7 +32,14 @@ def disconnect_from_socketio_server():
 def create_tournament(num_games):
     try:
         response = sio.call("tournament:create",num_games)
-        callback(response)
+        if response["success"]:
+            print("Tournament created!")
+            print(f"Tournament ID: {response['data']['tournamentId']}")
+            print(f"Current size: {response['data']['currentSize']}")
+            print(f"Best of: {response['data']['bestOf']}")
+        else:
+            print("Failed to create tournament.")
+            print(f"Error message: {response['error']}")
     except Exception as e:
         print(f"Failed to create tournament: {e}")
 
@@ -47,10 +55,9 @@ def join_tournament(tournament_id):
         print(f'Bad namespace error occurred: {e}')
 
 ## Starts a tournament with the specified ID
-# @param tournament_id The ID of the tournament to start
-def start_tournamet(tournament_id):
+def start_tournamet():
     try:
-        response = sio.call("tournament:start", tournament_id)
+        response = sio.call("tournament:start")
         callback(response)
     except Exception as e:
         print(f"Failed to start tournament: {e}")
@@ -59,8 +66,11 @@ def start_tournamet(tournament_id):
 def leave_tournament():
     try:
         response = sio.call("tournament:leave")
-        print("leave?")
-        callback(response)
+        if response["success"]:
+            print("You have left the tournament.")
+        else:
+            print("Failed to leave the tournament.")
+            print(f"Error message: {response['error']}")
     except Exception as e:
         print(f"Failed to leave tournament: {e}")
 
@@ -101,11 +111,11 @@ def callback(data):
 
 @sio.on('list:tournaments')
 def socket_tournament(list, namespace):
-    #print("palceholder")
     tournaments = tournament_list(list)
 
-@sio.on("tournament:playerInfo")
+@sio.on('tournament:playerInfo')
 def socket_playerInfo(data, namespace):
+    print("PLAYERINFO")
     print("Received tournament player info:")
     print(f"Tournament ID: {data['tournamentId']}")
     print(f"Current size: {data['currentSize']}")
@@ -114,6 +124,23 @@ def socket_playerInfo(data, namespace):
     for player in data['players']:
         print(f" - ID: {player['id']}, username: {player['username']}")
 
+@sio.on('tournament:info')
+def tourn_info(data, namespace):
+    print("TOURN INFO")
+    print("Message: ", data)
+
+@sio.on('tournament:status')
+def tourn_status(data, namespace):
+    print("TOURN STATUS")
+    print(json.dumps(data, indent=4))
+
+sio.on('game:state')
+def game_status(state, namespace):
+    print("GAME STATUS")
+    print(json.dumps(state, indent=4))
+
+
+
 def main():
     user = {"username": "nico", "password": "654321"}
     result = register_login_User.login(user)
@@ -121,7 +148,10 @@ def main():
     connect_to_socketio_server(result)
 
     create_tournament(3)
+
     leave_tournament()
+
+    disconnect_from_socketio_server()
 
 main()
 
