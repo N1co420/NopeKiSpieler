@@ -51,16 +51,16 @@ def join_tournament(tournament_id):
 def start_tournamet(tournament_id):
     try:
         response = sio.call("tournament:start", tournament_id)
-        
+        callback(response)
     except Exception as e:
         print(f"Failed to start tournament: {e}")
 
 ## Leaves a tournament with the specified ID
-# @param tournament_id The ID of the tournament to leave
-def leave_tournament(tournament_id):
+def leave_tournament():
     try:
-        response = sio.call("tournament:leave", tournament_id)
-        
+        response = sio.call("tournament:leave")
+        print("leave?")
+        callback(response)
     except Exception as e:
         print(f"Failed to leave tournament: {e}")
 
@@ -101,8 +101,8 @@ def callback(data):
 
 @sio.on('list:tournaments')
 def socket_tournament(list, namespace):
-    print("palceholder")
-    #tournaments = tournament_list(list)
+    #print("palceholder")
+    tournaments = tournament_list(list)
 
 @sio.on("tournament:playerInfo")
 def socket_playerInfo(data, namespace):
@@ -120,10 +120,8 @@ def main():
 
     connect_to_socketio_server(result)
 
-    #join_tournament("clhkhg4ik0000p907f5pedt3k")
-    
-    join_tournament("clhkk20pa0002p907i4uxdca0")
-    #leave_tournament("clhkhg4ik0000p907f5pedt3k")
+    create_tournament(3)
+    leave_tournament()
 
 main()
 
