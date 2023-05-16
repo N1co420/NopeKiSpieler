@@ -29,6 +29,7 @@ def login(data):
         # Extract the access token from the response JSON
         json_response = response.json()
         access_token = json_response["accessToken"]
+        print(json_response)
         return access_token
     else:
         print(response)
