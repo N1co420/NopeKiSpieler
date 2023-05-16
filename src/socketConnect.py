@@ -58,7 +58,13 @@ def join_tournament(tournament_id):
 def start_tournament():
     try:
         response = sio.call("tournament:start")
-        callback(response)
+        
+        if response["success"]:
+            print("Tournament started")
+        else:
+            print(f"Tournament failed to start: {response['error']['message']}")
+
+        print(f"Response: {response}")
     except Exception as e:
         print(f"Failed to start tournament: {e}")
 
@@ -94,13 +100,12 @@ def tournament_list(data):
         print("")
     return tournaments
 
-def tournament_invite(state, player_id):
+def tournament_reacct(state, player_id):
     try:
         response = sio.emit()
-        print("INVITE")
         print(response)
     except Exception as e:
-        print(f"Failed to invite to you tournament: {e}")
+        print(f"Failed to react to you tournament: {e}")
 
 
 ## Event handler for the SocketIO 'connect' event
@@ -154,7 +159,15 @@ def main():
     user = {"username": "nico", "password": "654321"}
     result, id = register_login_User.login(user)
 
-    print(id)
+    
+
+    connect_to_socketio_server(result)
+
+       
+
+        
+
+
 
 
 main()
