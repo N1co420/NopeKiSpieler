@@ -94,9 +94,9 @@ def tournament_list(data):
         print("")
     return tournaments
 
-def tournament_invite():
+def tournament_invite(state, player_id):
     try:
-        response = sio.call("tournament:invite")
+        response = sio.emit()
         print("INVITE")
         print(response)
     except Exception as e:
@@ -152,13 +152,10 @@ def game_status(state, namespace):
 
 def main():
     user = {"username": "nico", "password": "654321"}
-    result = register_login_User.login(user)
+    result, id = register_login_User.login(user)
 
-    connect_to_socketio_server(result)
+    print(id)
 
-    leave_tournament()
-
-    disconnect_from_socketio_server()
 
 main()
 
