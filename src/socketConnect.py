@@ -75,12 +75,6 @@ def leave_tournament():
             print(f"Error message: {response['error']}")
     except Exception as e:
         print(f"Failed to leave tournament: {e}")
+ 
 
-def main():
-    user = {"username": "nico", "password": "654321"}
-    result, id = register_login_User.login(user)
-
-    connect_to_socketio_server(result)
-
-main()
 
