@@ -1,7 +1,7 @@
 import socketio
 import json
 import socketConnect
-
+from events import *
 
 def myTurn(playerID, currentPlayerID):
     return playerID == currentPlayerID
@@ -77,7 +77,7 @@ def getValidMoves(hand, topCard):
 
     return validMoves
 
-def move(move_type, cards, select_color):
+def buildPayload(move_type, cards, select_color):
     payload = {
         "type": move_type,
         "card1": None,
@@ -86,8 +86,10 @@ def move(move_type, cards, select_color):
     }
     
     if move_type == "put":
-        # construct put payload
-        print("platzhalter")
+        payload["type"] = "put"
+        for i in range(len(cards)):
+            card_payload = create_number_card_payload(cards[i])
+            payload[f"card{i + 1}"] = card_payload
     elif move_type == "take":
         payload["type"] = "take"
     elif move_type == "nope":
@@ -96,9 +98,6 @@ def move(move_type, cards, select_color):
         if cards and len(cards) > 0:
             payload["card1"] = create_selection_card_payload(cards[0], select_color)
 
-        
-    # Send the payload to the server
-    # Your code here to send the payload to the server
     
 def create_number_card_payload(card):
     return {
@@ -115,6 +114,12 @@ def create_selection_card_payload(card, select_color):
         "selectColor": select_color
     }
 
+def send_payload(payload):
 
-
+    response = sio.emit("game:makeMove",payload)
+    # Check response status code
+    if response.status_code == 200:
+        print("Payload sent successfully!\n")
+    else:
+        print("Failed to send payload. Error:\n", response.text)
 
