@@ -37,28 +37,31 @@ def login(data):
 
 
 def call_login():
-    user = {"username": "nico", "password": "654321"}
+    user = {"username": "nico2", "password": "654321"}
     result = login(user)
 
     if result:
         # Login successful, do something here
         print(result)
+        print("eingloggt mit user")
     else:
         # Login failed, display error message to the user
         #error_label.config(text="Invalid username or password")
         print(result)
 
-  
-    
-
-
 # This function demonstrates how to call the register_user function and handle the result
 def call_register():
     # Attempt to register a new test account
     
-    data = {"username": "nico", "password": "654321", "firstname": "nico", "lastname": "huebner"}
+    data = {"username": "nico2", "password": "654321", "firstname": "nico2", "lastname": "huebner"}
 
     result = register(data)
     # Print the result of the registration attempt
     print(result)
 
+
+def main():
+    call_login()
+    print("done")
+
+main()
