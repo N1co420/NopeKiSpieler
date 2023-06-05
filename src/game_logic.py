@@ -27,35 +27,6 @@ def getWorstCard(selection):
     
     return worstCard
 
-
-def makeMove(hand, topCard, lastTopCard):
-    topCardType = topCard['type']
-    
-    if topCardType == "number":
-        validMoves = getValidMoves(hand, topCard)
-        # get Best of Valid Moves
-        # do Move
-        return
-    
-    if topCardType == "joker":
-        card2play = getWorstCard(hand)
-        return
-    
-    if topCardType == "reboot":
-        card2play = getWorstCard(hand)
-        return
-    
-    if topCardType == "see-through":
-        validMoves = getValidMoves(hand, lastTopCard)
-        return
-    
-    if topCardType == "selection":
-        # kläre was hier zu tun ist
-        return
-    
-    # Handle default case or raise an exception for unsupported topCardValue
-    raise ValueError("Invalid topCardValue")
-
 def getValidMoves(hand, topCard):
 
     topCardValue = topCard['value']
@@ -77,3 +48,34 @@ def getValidMoves(hand, topCard):
 
     return validMoves
 
+def bestMove(validMoves):
+    # currently just choose the first one
+    return validMoves[0]
+
+def makeMove(hand, topCard, lastTopCard):
+    topCardType = topCard['type']
+    
+    if topCardType == "number":
+        validMoves = getValidMoves(hand, topCard)
+        cards = bestMove(validMoves)
+        return cards
+    
+    if topCardType == "joker":
+        card2play = getWorstCard(hand)
+        return card2play
+    
+    if topCardType == "reboot":
+        card2play = getWorstCard(hand)
+        return card2play
+    
+    if topCardType == "see-through":
+        validMoves = getValidMoves(hand, lastTopCard)
+        cards = bestMove(validMoves)
+        return cards
+    
+    if topCardType == "selection":
+        # kläre was hier zu tun ist
+        return
+    
+    # Handle default case or raise an exception for unsupported topCardValue
+    raise ValueError("Invalid topCardValue")
