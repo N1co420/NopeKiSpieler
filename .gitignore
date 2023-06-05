@@ -1,2 +1,4 @@
 
 *.pyc
+src/__pycache__/register_login_User.cpython-311.pyc
+src/__pycache__/socketConnect.cpython-311.pyc
