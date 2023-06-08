@@ -1,8 +1,10 @@
 import socketio
 import requests
+import live_game
 import register_login_User
 import socketConnect
 from events import *
+import printFormater
 
 def main():
     # Connect to the server
@@ -30,7 +32,9 @@ def main():
             tournament_id = input("Enter the tournament ID: ")
             socketConnect.join_tournament(tournament_id)
         elif choice == "e":
-            socketConnect.start_tournament()
+            result = socketConnect.start_tournament()
+            if result == True:
+                print("STARTED:")
         elif choice == "r":
             socketConnect.leave_tournament()
         elif choice == "t":
@@ -38,6 +42,8 @@ def main():
             break
         else:
             print("Invalid choice. Please try again.")
+
+        
 
 
 main()
