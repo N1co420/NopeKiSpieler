@@ -57,6 +57,7 @@ def start_tournament():
         
         if response["success"]:
             print("Tournament started")
+            return True 
         else:
             print(f"Tournament failed to start: {response['error']['message']}")
 
