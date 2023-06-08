@@ -1,8 +1,17 @@
 import socketio
 import json
-
+import live_game
+import printFormater
+import time
 ## Creates a new instance of the SocketIO client
 sio = socketio.Client()
+
+topCard = None
+hand= None
+last_move = None
+currentPlayer = None
+last_TopCard = None
+player_id = None
 
 
 ## Event handler for the SocketIO 'connect' event
@@ -28,71 +37,41 @@ def socket_tournament(list, namespace):
 
 @sio.on('tournament:playerInfo')
 def socket_playerInfo(data, namespace):
-    print("PLAYERINFO")
-    print("Received tournament player info:")
-    print(f"Tournament ID: {data['tournamentId']}")
-    print(f"Current size: {data['currentSize']}")
-    print(f"Best of: {data['bestOf']}")
-    print("Players:")
-    for player in data['players']:
-        print(f" - ID: {player['id']}, username: {player['username']}")
-    print("")
+    printFormater.printPlayerInfo(data)
 
 @sio.on('tournament:info')
 def tourn_info(data, namespace):
-    print("TOURN INFO")
-    print("Message: ", data['message'])
-    print("Tournament ID: ", data['tournamentId'])
-    print("Current Size: ", data['currentSize'])
-    print("Status: ", data['status'])
-    print("Players:")
-    for player in data['players']:
-        print(" - ID:", player['id'])
-        print("   Username:", player['username'])
-        print("   Score:", player['score'])
-    print("Winner: ", data['winner'])
-    print("Host:")
-    print(" - ID:", data['host']['id'])
-    print("   Username:", data['host']['username'])
-    print("")
+    printFormater.printTournInfo(data)
 
 
 @sio.on('tournament:status')
 def tourn_status(data, namespace):
-    print("TOURN STATUS")
-    print(json.dumps(data, indent=4))
+    printFormater.printTournStatus(data)
 
 @sio.on('game:state')
 def game_status(state, namespace):
-    print("GAME STATUS")
-    print("Match ID:", state['matchId'])
-    print("Game ID:", state['gameId'])
-    print("Top Card:")
-    print(" - Type:", state['topCard']['type'])
-    print(" - Color:", state['topCard']['color'])
-    print(" - Value:", state['topCard']['value'])
-    print("Last Top Card:", state['lastTopCard'])
-    print("Draw Pile Size:", state['drawPileSize'])
-    print("Players:")
-    for player in state['players']:
-        print(" - ID:", player['id'])
-        print("   Username:", player['username'])
-        print("   Hand Size:", player['handSize'])
-    print("Hand:")
-    for card in state['hand']:
-        print(" - Type:", card['type'])
-        print("   Color:", card['color'])
-        print("   Value:", card['value'])
-    print("Hand Size:", state['handSize'])
-    print("Current Player:")
-    print(" - ID:", state['currentPlayer']['id'])
-    print("   Username:", state['currentPlayer']['username'])
-    print("Current Player Index:", state['currentPlayerIdx'])
-    print("Previous Player:", state['prevPlayer'])
-    print("Previous Player Index:", state['prevPlayerIdx'])
-    print("Previous Turn Cards:", state['prevTurnCards'])
-    print("Last Move:", state['lastMove'])
-    print("")
+    #printFormater.printGameStatus(state)
+    global topCard, hand, last_move, currentPlayer, last_TopCard, player_id
+
+    topCard = state['topCard']
+    last_TopCard = state['lastTopCard']
+    last_move = state['last_move']
+    hand = state['hand']
+    currentPlayer = state['currentPlayer']
+    player_id = state['player_id']
+
+    if player_id == currentPlayer['id']:
+        print("HANDKARTEN:  ")
+        for card in state['hand']:
+            print(card['type'], card['color'], card['value'])
+
+@sio.on('make:move')
+def make_move(data):
+    global topCard, hand
+    print(data['message'])
+    move = None # ki_spieler.build_move()
+    time.sleep(0.5)
+    return move
 
 ## Formats and prints a list of tournaments received from the server
 # @param data The data received from the server, containing a list of tournaments
