@@ -1,8 +1,20 @@
 import game_rules_numbercards
+import game_rules_specials
 import payload_builder
+
+lastTake = None
 
 def kiPlayerNumbers(hand, topCard):
     global lastTake
+
+    matchingcards = game_rules_specials.getMatchingCards(hand, topCard)
+    
+
+    sets = game_rules_specials.get_possible_sets(matchingcards, topCard)
+
+    print(sets)
+    
+    return matchingcards
 
     matching_cards = game_rules_numbercards.get_matching_cards(hand, topCard)
     if matching_cards is None:
@@ -28,34 +40,20 @@ def kiPlayerNumbers(hand, topCard):
 def main():
     hand = [
         {"type": "number", "color": "blue", "value": 2},
-        {"type": "number", "color": "yellow", "value": 1},
+        {"type": "restart", "color": "yellow", "value": None},
         {"type": "number", "color": "red-blue", "value": 2},
-        {"type": "number", "color": "red-blue", "value": 1},
+        {"type": "see-through", "color": "yellow", "value": None},
         {"type": "number", "color": "blue-green", "value": 3},
-        {"type": "number", "color": "red-green", "value": 3},
-        {"type": "number", "color": "red", "value": 1},
+        {"type": "joker", "color": "multi", "value": 1},
+        {"type": "joker", "color": "multi", "value": 1},
         {"type": "number", "color": "yellow-green", "value": 1}
     ]     
     
-    topCard = {"type": "number", "color": "yellow", "value": 3}
+    topCard = {"type": "number", "color": "red", "value": 3}
     
     payload = kiPlayerNumbers(hand, topCard)
-
-    hand2 = [
-        {"type": "number", "color": "blue", "value": 2},
-        {"type": "number", "color": "yellow", "value": 1},
-        {"type": "number", "color": "red-blue", "value": 2},
-        {"type": "number", "color": "red-blue", "value": 1},
-        {"type": "number", "color": "blue-green", "value": 3},
-        {"type": "number", "color": "red-green", "value": 3},
-        {"type": "number", "color": "red", "value": 1},
-        {"type": "number", "color": "yellow-green", "value": 1},
-        {"type": "number", "color": "red", "value": 1}
-    ]    
     
-    topCard2 = {"type": "number", "color": "yellow", "value": 3}
 
-    payload2 = kiPlayerNumbers(hand2, topCard2)
 
 # Call the main function
 main()
