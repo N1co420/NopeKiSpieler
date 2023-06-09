@@ -27,17 +27,20 @@ def get_matching_cards(hand, topCard):
     else:
         return None
 
-def get_possible_sets(matchingCards, topCard):
+def get_possible_number_sets(matchingCards, topCard):
     setSize = topCard["value"]
     possibleSets = []
 
     for combination in combinations(matchingCards, setSize):
-        possibleSets.append(list(combination))
+        setContainsOnlyNumbers = all(card["type"] == "number" for card in combination)
+        if setContainsOnlyNumbers:
+            possibleSets.append(list(combination))
 
     if len(possibleSets) > 0:
         return possibleSets
     else:
         return None
+
 
 def get_best_set(possibleSets):
     best_set = None
