@@ -8,7 +8,7 @@ def kiPlayerNumbers(hand, topCard):
     global lastTake   
 
     matching_cards = game_rules_specials.getMatchingCards(hand, topCard)
-
+    
     print("matching cards:  ")
     print(matching_cards)
     print("")
@@ -38,7 +38,7 @@ def kiPlayerNumbers(hand, topCard):
 def main():
     hand = [
         {"type": "number", "color": "green", "value": 2},
-        {"type": "restart", "color": "yellow", "value": None},
+        {"type": "restart", "color": "red-blue", "value": None},
         {"type": "number", "color": "red-blue", "value": 2},
         {"type": "see-through", "color": "yellow", "value": None},
         {"type": "number", "color": "blue-green", "value": 3},
@@ -47,7 +47,7 @@ def main():
         {"type": "number", "color": "yellow-green", "value": 1}
     ]     
     
-    topCard = {"type": "number", "color": "red-blue", "value": 3}
+    topCard = {"type": "number", "color": "blue", "value": 3}
     
     payload = kiPlayerNumbers(hand, topCard)
     

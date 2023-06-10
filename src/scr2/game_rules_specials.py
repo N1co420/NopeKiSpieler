@@ -1,17 +1,6 @@
 import game_rules_numbercards
 from itertools import combinations
 
-def cardOfChoice(hand):
-    print("get Card of choice")
-    print("bei Neustart und Joker")
-
-def seeThough():
-    print("TopCard = LastTopCard")
-    print("Call KI again")
-
-def doubleSeeThrough():
-    print("use 2 Cards down")
-
 def getJokers(hand):
     jokers = []
 
@@ -21,6 +10,17 @@ def getJokers(hand):
             jokers.append(card)
 
     return jokers
+
+def getMatchingActionCards(hand, topCardColor):
+    actionCards = []
+
+    for card in hand:
+        if card["type"] != "number":
+            color = card["color"]
+            if matchingColor(color, topCardColor):
+                actionCards.append(card)
+
+    return actionCards
 
 def matchingColor(cardColor, topCardColor):
     cardColors = cardColor.split('-')
@@ -44,11 +44,14 @@ def getMatchingCards(hand, topCard):
 def get_possible_sets(matchingCards, topCard):
     
     matchingSets = game_rules_numbercards.get_possible_number_sets(matchingCards, topCard)
+    matchingActions = getMatchingActionCards(matchingCards, topCardColor=topCard["color"])
 
     if matchingSets == None:
         matchingJokerSets = jokerCanFillSet(matchingCards, topCard)
+        matchingJokerSets.extend(matchingActions)
         return matchingJokerSets
     else:
+        matchingSets.extend(matchingActions)
         return matchingSets
 
 def jokerCanFillSet(matchingCards, topCard):
@@ -81,9 +84,6 @@ def jokerCanFillSet(matchingCards, topCard):
         return None
 
 
-def bestJokerSet(sets):
-
-    return sets[0]
 
 
     
