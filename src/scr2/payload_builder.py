@@ -26,12 +26,12 @@ def buildPayload(move_type, cards, reason):
 
     
 def create_card_payload(card):
-    if card["type"] == "number":
-        return {
+    return {
             "type": card["type"],
             "color": card["color"],
             "value": card["value"]
-        }
+    }
+    
     
 
 
