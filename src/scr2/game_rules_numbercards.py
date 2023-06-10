@@ -31,9 +31,15 @@ def get_possible_number_sets(matchingCards, topCard):
     setSize = topCard["value"]
     possibleSets = []
 
-    for combination in combinations(matchingCards, setSize):
-        setContainsOnlyNumbers = all(card["type"] == "number" for card in combination)
-        if setContainsOnlyNumbers:
+    if setSize > len(matchingCards):
+        return None
+    
+    numberCards = [card for card in matchingCards if card["type"] == "number"]
+    numberCombinations = combinations(numberCards, setSize)
+
+    for combination in numberCombinations:
+        colorsMatch = all(matchingColor(card1["color"], card2["color"]) for card1 in combination for card2 in combination)
+        if colorsMatch:
             possibleSets.append(list(combination))
 
     if len(possibleSets) > 0:

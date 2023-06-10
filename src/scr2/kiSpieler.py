@@ -5,24 +5,22 @@ import payload_builder
 lastTake = None
 
 def kiPlayerNumbers(hand, topCard):
-    global lastTake
+    global lastTake   
 
-    matchingcards = game_rules_specials.getMatchingCards(hand, topCard)
+    matching_cards = game_rules_specials.getMatchingCards(hand, topCard)
+
+    print("matching cards:  ")
+    print(matching_cards)
+    print("")
     
-
-    sets = game_rules_specials.get_possible_sets(matchingcards, topCard)
-
-    print(sets)
-    
-    return matchingcards
-
-    matching_cards = game_rules_numbercards.get_matching_cards(hand, topCard)
     if matching_cards is None:
         lastTake = "take"
         payload = payload_builder.buildPayload(lastTake, None, "No Cards to put")
     else:
-        possible_sets = game_rules_numbercards.get_possible_sets(matching_cards, topCard)
-
+        possible_sets = game_rules_specials.get_possible_sets(matching_cards, topCard)
+        print("possible sets: ")
+        print(possible_sets)
+        print(" ")
         if possible_sets is None:
             if lastTake == "take":
                 lastTake = "nope"
@@ -39,17 +37,17 @@ def kiPlayerNumbers(hand, topCard):
 
 def main():
     hand = [
-        {"type": "number", "color": "blue", "value": 2},
+        {"type": "number", "color": "green", "value": 2},
         {"type": "restart", "color": "yellow", "value": None},
         {"type": "number", "color": "red-blue", "value": 2},
         {"type": "see-through", "color": "yellow", "value": None},
         {"type": "number", "color": "blue-green", "value": 3},
-        {"type": "joker", "color": "multi", "value": 1},
+        {"type": "number", "color": "red", "value": 1},
         {"type": "joker", "color": "multi", "value": 1},
         {"type": "number", "color": "yellow-green", "value": 1}
     ]     
     
-    topCard = {"type": "number", "color": "red", "value": 3}
+    topCard = {"type": "number", "color": "red-blue", "value": 3}
     
     payload = kiPlayerNumbers(hand, topCard)
     

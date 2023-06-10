@@ -55,16 +55,35 @@ def jokerCanFillSet(matchingCards, topCard):
     setSize = topCard["value"]
     possibleSets = []
 
-    for combination in combinations(matchingCards, setSize):
-        setsWithJoker = all((card["type"] == "number" or card["type"] == "joker") for card in combination)
-        if setsWithJoker:
+    if setSize > len(matchingCards):
+        return None
+    
+    Cards = [card for card in matchingCards if card["type"] == "number" or card["type"] == "joker"]
+    cardsCombination = combinations(Cards, setSize)
+
+    for combination in cardsCombination:
+        colorsMatch = True
+        for card1 in combination:
+            for card2 in combination:
+                if card1 != card2:
+                    if not matchingColor(card1["color"], card2["color"]) and not card1["type"] == "joker" and not card2["type"] == "joker":
+                        colorsMatch = False
+                        break
+            if not colorsMatch:
+                break
+        if colorsMatch:
             possibleSets.append(list(combination))
+            
 
     if len(possibleSets) > 0:
         return possibleSets
     else:
         return None
 
+
+def bestJokerSet(sets):
+
+    return sets[0]
 
 
     
