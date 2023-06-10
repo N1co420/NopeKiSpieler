@@ -1,7 +1,7 @@
 import game_rules_numbercards
 import game_rules_specials
 import payload_builder
-
+from sio_events import last_TopCard
 lastTake = None
 
 def kiPlayerNumbers(hand, topCard):
@@ -34,6 +34,56 @@ def kiPlayerNumbers(hand, topCard):
             payload = payload_builder.buildPayload(lastTake, best_set, "Best Values, best Colors")
 
     return payload
+
+def kiPlayerAll(hand, topCard):
+    topCardColor = topCard["color"]
+    topCardValue = topCard["value"]
+    topCardType = topCard["type"]
+
+    matchingCards = game_rules_specials.getMatchingCards(hand, last_TopCard)
+
+    if matchingCards is None:
+        #take
+        payload = take()
+    if topCardType != "number":
+        if topCardType == "see-through":
+            # play with lastTopCard
+            payload = kiPlayerAll(hand, last_TopCard)
+        else:
+            # choose one card from your hand
+            choosencard, reason = chooseCard(hand)
+            payload = payload_builder.buildPayload(lastTake, choosencard, reason)
+    else:
+        possibleSets = game_rules_specials.get_possible_sets(matchingCards, topCard)
+        if possibleSets is None:
+            # take
+            payload = take()
+        else:
+            # Choose best set and play it
+            best_set, reason = get_best_set(possibleSets, topCard)
+            payload = payload_builder.buildPayload(lastTake, best_set, reason)
+    
+    return payload #payload
+
+def take():
+    if lastTake == "take":
+        lastTake = "nope"
+        payload = payload_builder.buildPayload(lastTake, None, "Nope!")
+    else:
+        lastTake = "take"
+        payload = payload_builder.buildPayload(lastTake, None, "No Cards to put")
+    return payload
+
+def chooseCard(hand):
+    print("choose a card due to rules")
+    choosenCard = None
+    choosenReason = "Fuck you"
+    return choosenCard, choosenReason
+
+def get_best_set(possibleSets, topCard):
+    best_set = None
+    reason = "Fuck you"
+    return best_set, reason
 
 def main():
     hand = [
