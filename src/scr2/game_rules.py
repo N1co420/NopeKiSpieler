@@ -10,28 +10,16 @@ def matchingColor(cardColor, topCardColor):
 
     return False
 
-def getMatchingCards(hand, topCard):
-    matchingCards = []
-    topCardColor = topCard["color"]
+def get_matching_cards(hand, topCard, only_action_cards=False):
+    matching_cards = []
+    top_card_color = topCard["color"]
 
     for card in hand:
         color = card["color"]
-        if matchingColor(color, topCardColor):
-            matchingCards.append(card)
+        if matchingColor(color, top_card_color) and (not only_action_cards or card["type"] != "number"):
+            matching_cards.append(card)
 
-    return matchingCards
-
-def getMatchingActionCards(hand, topCard):
-    actionCards = []
-    topCardColor = topCard["color"]
-
-    for card in hand:
-        if card["type"] != "number":
-            color = card["color"]
-            if matchingColor(color, topCardColor):
-                actionCards.append(card)
-
-    return actionCards
+    return matching_cards
 
 def get_possible_sets(matchingCards, topCard):
     setSize = topCard["value"]
@@ -59,13 +47,13 @@ def get_possible_sets(matchingCards, topCard):
         return None
 
 def get_moves(hand, topCard):
-    cards = getMatchingCards(hand, topCard)
+    cards = get_matching_cards(hand, topCard, only_action_cards=False)
     if cards is None:
         return None
     
     moves = get_possible_sets(cards, topCard)
 
-    actionCards = getMatchingActionCards(hand, topCard)
+    actionCards = get_matching_cards(hand, topCard, only_action_cards=True)
     
     moves.extend([[matchingAction] for matchingAction in actionCards])  
     
@@ -86,12 +74,15 @@ def main():
         {"type": "number", "color": "red-green", "value": 1}
     ]     
     
-    topCard = {"type": "number", "color": "yellow", "value": 2}
+    topCard = {"type": "number", "color": "red-blue", "value": 2}
     lastTopCard = {"type": "number", "color": "blue", "value": 3}
 
-    moves = get_moves(hand, topCard)
-
-    for move in moves:
-        print(move)
-
-
+    cards = get_matching_cards(hand, topCard, only_action_cards=False)
+    cardsA = get_matching_cards(hand=hand, topCard=topCard, only_action_cards=True)
+    print("All Cards\n")
+    for card in cards:
+        print(card)
+    print("Action Cards\n")
+    for card in cardsA:
+        print(card)
+main()
