@@ -62,7 +62,6 @@ def get_moves(hand, topCard):
     
     if moves is None or len(moves) < topCard["value"]:
         return None
-    
     return moves
 
 def testing():
@@ -83,10 +82,4 @@ def testing():
     cards = get_matching_cards(hand, topCard, only_action_cards=False)
     moves = get_moves(cards, topCard)
 
-    if moves is None:
-        print("take")
-    else:
-        for move in moves:
-            print(move)
-
-testing()
+    

@@ -8,17 +8,10 @@ def kiPlayerNumbers(hand, topCard):
 
     matching_cards = game_rules.get_matching_cards(hand, topCard, only_action_cards=False)
     
-    print("matching cards:  ")
-    print(matching_cards)
-    print("")
-    
     if matching_cards is None:
         payload = take()
     else:
         possible_sets = game_rules.get_moves(matching_cards, topCard)
-        print("possible sets: ")
-        print(possible_sets)
-        print(" ")
         if possible_sets is None:
             payload = take()
         else:
@@ -29,6 +22,7 @@ def kiPlayerNumbers(hand, topCard):
     return payload
 
 def kiPlayerAll(hand, topCard, lastTopCard):
+    global lastTake
     topCardColor = topCard["color"]
     topCardValue = topCard["value"]
     topCardType = topCard["type"]
@@ -37,28 +31,31 @@ def kiPlayerAll(hand, topCard, lastTopCard):
 
     if matchingCards is None or len(matchingCards) < topCardValue:
         #take
-        payload = take()
+        lastTake, reason = take()
+        payload = payload_builder.buildPayload(lastTake, reason)
+        return payload
     if topCardType != "number":
         if topCardType == "see-through":
-            # play with lastTopCard
+            print("FUUUUUCK")
             payload = kiPlayerAll(hand, lastTopCard, None)
         else:
             lastTake = "put"
             # choose one card from your hand
-            choosen_card, reason = choose_card(hand)
-            payload = payload_builder.buildPayload(lastTake, choosen_card, reason)
+            choosen_card, reason = get_best_move(hand, topCard)
+            payload = payload_builder.buildPayload(lastTake, reason, choosen_card)
     else:
         possibleSets = game_rules.get_moves(matchingCards, topCard)
         if possibleSets is None:
             # take
-            payload = take()
+            lastTake, reason = take()
+            payload = payload_builder.buildPayload(lastTake, reason)
+            return payload
         else:
             lastTake = "put"
             # Choose best set and play it
             best_set, reason = get_best_move(possibleSets, topCard)
-            payload = payload_builder.buildPayload(lastTake, best_set, reason)
-    
-    return payload #payload
+            payload = payload_builder.buildPayload(lastTake, reason, best_set)
+    return payload
 
 def calculate_move_utility(move, top_card_value):
     utility_value = 0
@@ -102,17 +99,17 @@ def get_best_move(possibleSets, topCard):
         
 def take():
     global lastTake
-    reason = "Fuck you"
+    reason = ""
 
     if lastTake == "take":
         lastTake = "nope"
         reason = "Still no cards and lastMove was Take"
-        payload = payload_builder.buildPayload(lastTake, reason)
     else:
         lastTake = "take"
         reason = "No Cards to put"
-        payload = payload_builder.buildPayload(lastTake, reason)
-    return payload
+
+    return lastTake, reason
+
 
 def choose_card(hand):
 
@@ -129,6 +126,8 @@ def choose_card(hand):
     return chosen_card , chosen_reason 
 
 def main():
+    
+
     hand = [
         {"type": "number", "color": "green", "value": 2},
         {"type": "restart", "color": "red-blue", "value": None},
@@ -144,8 +143,8 @@ def main():
     lastTopCard = {"type": "number", "color": "blue", "value": 3}
     
     payload = kiPlayerAll(hand, topCard, lastTopCard)
-    
+    payload2 = kiPlayerAll(hand, topCard, lastTopCard)
 
-# Call the main function
-
-main()
+# Only execute the main function if the script is run directly
+if __name__ == "__main__":
+    main()
