@@ -130,17 +130,17 @@ def main():
     
 
     hand = [
-        {"type": "number", "color": "green", "value": 2},
-        {"type": "restart", "color": "red-blue", "value": None},
-        {"type": "number", "color": "red-blue", "value": 2},
-        {"type": "see-through", "color": "red", "value": None},
-        {"type": "number", "color": "blue-green", "value": 3},
-        {"type": "number", "color": "red", "value": 1},
-        {"type": "joker", "color": "multi", "value": 1},
-        {"type": "number", "color": "red-green", "value": 1}
+        {"type": "number", "color": "red-green", "value": 1},
+        {"type": "number", "color": "yellow", "value": 2},
+        {"type": "number", "color": "yellow-green", "value": 2},
+        {"type": "number", "color": "red-yellow", "value": 3},
+        {"type": "number", "color": "red-green", "value": 3},
+        {"type": "number", "color": "red-blue", "value": 3},
+        {"type": "number", "color": "red", "value": 2},
+        {"type": "number", "color": "red-green", "value": 3}
     ]     
     
-    topCard = {"type": "number", "color": "green", "value": 3}
+    topCard = {"type": "number", "color": "red", "value": 1}
     lastTopCard = {"type": "number", "color": "blue", "value": 3}
     
     payload = kiPlayerAll(hand, topCard, lastTopCard)
