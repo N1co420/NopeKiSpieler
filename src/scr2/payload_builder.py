@@ -1,12 +1,12 @@
 
 
-def buildPayload(move_type, cards, reason):
+def buildPayload(move_type, reason, cards=None):
     payload = {
         "type": move_type,
         "card1": None,
         "card2": None,
         "card3": None,
-        "reason" : "A"
+        "reason" : reason
     }
     
     if move_type == "put":
