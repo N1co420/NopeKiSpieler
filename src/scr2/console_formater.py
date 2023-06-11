@@ -26,6 +26,37 @@ def printTournInfo(data):
     print("   Username:", data['host']['username'])
     print("")
 
+def printGameState(state):
+    print("GAME STATUS")
+    print("Match ID:", state['matchId'])
+    print("Game ID:", state['gameId'])
+    print("Top Card:")
+    print(" - Type:", state['topCard']['type'])
+    print(" - Color:", state['topCard']['color'])
+    print(" - Value:", state['topCard']['value'])
+    print("Last Top Card:", state['lastTopCard'])
+    print("Draw Pile Size:", state['drawPileSize'])
+    print("Players:")
+    for player in state['players']:
+        print(" - ID:", player['id'])
+        print("   Username:", player['username'])
+        print("   Hand Size:", player['handSize'])
+    print("Hand:")
+    for card in state['hand']:
+        print(" - Type:", card['type'])
+        print("   Color:", card['color'])
+        print("   Value:", card['value'])
+    print("Hand Size:", state['handSize'])
+    print("Current Player:")
+    print(" - ID:", state['currentPlayer']['id'])
+    print("   Username:", state['currentPlayer']['username'])
+    print("Current Player Index:", state['currentPlayerIdx'])
+    print("Previous Player:", state['prevPlayer'])
+    print("Previous Player Index:", state['prevPlayerIdx'])
+    print("Previous Turn Cards:", state['prevTurnCards'])
+    print("Last Move:", state['lastMove'])
+    print("")
+
 ## Formats and prints a list of tournaments received from the server
 # @param data The data received from the server, containing a list of tournaments
 # @return The list of tournaments as a dictionary
