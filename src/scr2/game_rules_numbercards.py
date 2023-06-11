@@ -30,9 +30,6 @@ def get_matching_cards(hand, topCard):
 def get_possible_number_sets(matchingCards, topCard):
     setSize = topCard["value"]
     possibleSets = []
-
-    if setSize > len(matchingCards):
-        return None
     
     numberCards = [card for card in matchingCards if card["type"] == "number"]
     numberCombinations = combinations(numberCards, setSize)

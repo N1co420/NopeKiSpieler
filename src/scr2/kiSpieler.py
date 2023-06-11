@@ -1,7 +1,7 @@
 import game_rules_numbercards
 import game_rules_specials
 import payload_builder
-import sio_events
+
 lastTake = None
 
 def kiPlayerNumbers(hand, topCard): 
@@ -28,12 +28,12 @@ def kiPlayerNumbers(hand, topCard):
 
     return payload
 
-def kiPlayerAll(hand, topCard):
+def kiPlayerAll(hand, topCard, lastTopCard):
     topCardColor = topCard["color"]
     topCardValue = topCard["value"]
     topCardType = topCard["type"]
 
-    matchingCards = game_rules_specials.getMatchingCards(hand, sio_events.last_TopCard)
+    matchingCards = game_rules_specials.getMatchingCards(hand, topCard)
 
     if matchingCards is None:
         #take
@@ -41,12 +41,12 @@ def kiPlayerAll(hand, topCard):
     if topCardType != "number":
         if topCardType == "see-through":
             # play with lastTopCard
-            payload = kiPlayerAll(hand, sio_events.last_TopCard)
+            payload = kiPlayerAll(hand, lastTopCard, None)
         else:
             lastTake = "put"
             # choose one card from your hand
-            choosencard, reason = chooseCard(hand)
-            payload = payload_builder.buildPayload(lastTake, choosencard, reason)
+            choosen_card, reason = choose_card(hand)
+            payload = payload_builder.buildPayload(lastTake, choosen_card, reason)
     else:
         possibleSets = game_rules_specials.get_possible_sets(matchingCards, topCard)
         if possibleSets is None:
@@ -55,11 +55,51 @@ def kiPlayerAll(hand, topCard):
         else:
             lastTake = "put"
             # Choose best set and play it
-            best_set, reason = get_best_set(possibleSets, topCard)
+            best_set, reason = get_best_move(possibleSets, topCard)
             payload = payload_builder.buildPayload(lastTake, best_set, reason)
     
     return payload #payload
 
+def calculate_move_utility(move, top_card_value):
+    utility_value = 0
+
+    for card in move:
+        card_color = card["color"]
+        
+        if card["type"] != "number":
+            utility_value = calculate_card_utility(top_card_value, utility_value)
+        else:
+            utility_value = calculate_card_utility(card["value"], utility_value)
+
+        if len(card_color.split('-')) == 1 :
+            utility_value *= 0.75
+
+    return utility_value
+
+def calculate_card_utility(value, utility_value):
+    if value == 1:
+        utility_value -= 1
+    elif value == 2:
+        utility_value += 1
+    else:  # value == 3
+        utility_value += 2
+
+    return utility_value
+
+def get_best_move(possibleSets, topCard):
+    best_move = None
+    bestmove_value = 100
+    reason = "Fuck you"
+    topCardValue =  topCard["value"]
+
+    for move in possibleSets:
+        move_value = calculate_move_utility(move,topCardValue)
+        if move_value < bestmove_value:
+            bestmove_value = move_value
+            best_move = move
+
+    return best_move, reason
+        
 def take():
     global lastTake
 
@@ -71,34 +111,37 @@ def take():
         payload = payload_builder.buildPayload(lastTake, None, "No Cards to put")
     return payload
 
-def chooseCard(hand):
-    print("choose a card due to rules")
-    choosenCard = None
-    choosenReason = "Fuck you"
-    return choosenCard, choosenReason
+def choose_card(hand):
 
-def get_best_set(possibleSets, topCard):
-    best_set = None
-    reason = "Fuck you"
-    return best_set, reason
+    chosen_card  = None
+    move_utility = -100
+
+    for card in hand:
+        card_move_utility = calculate_move_utility([card], 1)
+        if card_move_utility > move_utility:
+            move_utility = card_move_utility
+            chosen_card = card
+
+    chosen_reason  = "Card with best move_utility: "+ str(move_utility)
+    return chosen_card , chosen_reason 
 
 def main():
     hand = [
         {"type": "number", "color": "green", "value": 2},
         {"type": "restart", "color": "red-blue", "value": None},
         {"type": "number", "color": "red-blue", "value": 2},
-        {"type": "see-through", "color": "yellow", "value": None},
+        {"type": "see-through", "color": "red", "value": None},
         {"type": "number", "color": "blue-green", "value": 3},
         {"type": "number", "color": "red", "value": 1},
-        {"type": "joker", "color": "multi", "value": 1},
-        {"type": "number", "color": "yellow-green", "value": 1}
+        # {"type": "joker", "color": "multi", "value": 1},
+        {"type": "number", "color": "red-green", "value": 1}
     ]     
     
-    #topCard = {"type": "number", "color": "blue", "value": 3}
+    topCard = {"type": "number", "color": "yellow", "value": 3}
+    lastTopCard = {"type": "number", "color": "blue", "value": 3}
     
-    #payload = kiPlayerNumbers(hand, topCard)
-    
-
+    payload = kiPlayerAll(hand, topCard, lastTopCard)
+    # print(payload)
 
 # Call the main function
-# main()
+main()

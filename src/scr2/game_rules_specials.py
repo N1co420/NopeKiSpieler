@@ -33,25 +33,27 @@ def matchingColor(cardColor, topCardColor):
     return False
 
 def getMatchingCards(hand, topCard):
-    jokers = getJokers(hand)
+    matchingCards = []
+    topCardColor = topCard["color"]
 
-    matchingCards = game_rules_numbercards.get_matching_cards(hand, topCard)
-
-    matchingCards.extend(jokers)
+    for card in hand:
+        color = card["color"]
+        if matchingColor(color, topCardColor):
+            matchingCards.append(card)
 
     return matchingCards
 
 def get_possible_sets(matchingCards, topCard):
     
-    matchingSets = game_rules_numbercards.get_possible_number_sets(matchingCards, topCard)
+    matchingSets = jokerCanFillSet(matchingCards, topCard)
     matchingActions = getMatchingActionCards(matchingCards, topCardColor=topCard["color"])
 
     if matchingSets == None:
         matchingJokerSets = jokerCanFillSet(matchingCards, topCard)
-        matchingJokerSets.extend(matchingActions)
+        matchingJokerSets.extend([matchingAction] for matchingAction in matchingActions)
         return matchingJokerSets
     else:
-        matchingSets.extend(matchingActions)
+        matchingSets.extend([matchingAction] for matchingAction in matchingActions)
         return matchingSets
 
 def jokerCanFillSet(matchingCards, topCard):
