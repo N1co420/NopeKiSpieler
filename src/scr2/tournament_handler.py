@@ -1,7 +1,7 @@
 import socketio
 import requests
-import register_login_User
-from events import *
+
+from sio_events import *
 
 ## Attempts to connect to the SocketIO server with the specified access token
 # @param access_token The access token used to authenticate with the server

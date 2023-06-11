@@ -4,6 +4,7 @@ import time
 import console_formater
 ## Get UserID
 from rest_api import user_id
+from kiSpieler import kiPlayerNumbers, kiPlayerAll
 ## Creates a new instance of the SocketIO client
 sio = socketio.Client()
 
@@ -74,6 +75,7 @@ def game_status(data, namespace):
 def make_move(data, namespace):
     global topCard, hand
     print(data['message'])
-    move = None # ki_spieler.build_move()
+    move = kiPlayerNumbers(hand, topCard)
+    print(move)
     time.sleep(0.5)
     return move

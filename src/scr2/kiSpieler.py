@@ -1,33 +1,26 @@
 import game_rules_numbercards
 import game_rules_specials
 import payload_builder
-from sio_events import last_TopCard
+import sio_events
 lastTake = None
 
-def kiPlayerNumbers(hand, topCard):
-    global lastTake   
+def kiPlayerNumbers(hand, topCard): 
 
-    matching_cards = game_rules_specials.getMatchingCards(hand, topCard)
+    matching_cards = game_rules_numbercards.get_matching_cards(hand, topCard)
     
     print("matching cards:  ")
     print(matching_cards)
     print("")
     
     if matching_cards is None:
-        lastTake = "take"
-        payload = payload_builder.buildPayload(lastTake, None, "No Cards to put")
+        payload = take()
     else:
-        possible_sets = game_rules_specials.get_possible_sets(matching_cards, topCard)
+        possible_sets = game_rules_numbercards.get_possible_number_sets(matching_cards, topCard)
         print("possible sets: ")
         print(possible_sets)
         print(" ")
         if possible_sets is None:
-            if lastTake == "take":
-                lastTake = "nope"
-                payload = payload_builder.buildPayload(lastTake, None, "Nope!")
-            else:
-                lastTake = "take"
-                payload = payload_builder.buildPayload(lastTake, None, "No Cards to put")
+            payload = take()
         else:
             lastTake = "put"
             best_set = game_rules_numbercards.get_best_set(possible_sets)
@@ -40,7 +33,7 @@ def kiPlayerAll(hand, topCard):
     topCardValue = topCard["value"]
     topCardType = topCard["type"]
 
-    matchingCards = game_rules_specials.getMatchingCards(hand, last_TopCard)
+    matchingCards = game_rules_specials.getMatchingCards(hand, sio_events.last_TopCard)
 
     if matchingCards is None:
         #take
@@ -48,8 +41,9 @@ def kiPlayerAll(hand, topCard):
     if topCardType != "number":
         if topCardType == "see-through":
             # play with lastTopCard
-            payload = kiPlayerAll(hand, last_TopCard)
+            payload = kiPlayerAll(hand, sio_events.last_TopCard)
         else:
+            lastTake = "put"
             # choose one card from your hand
             choosencard, reason = chooseCard(hand)
             payload = payload_builder.buildPayload(lastTake, choosencard, reason)
@@ -59,6 +53,7 @@ def kiPlayerAll(hand, topCard):
             # take
             payload = take()
         else:
+            lastTake = "put"
             # Choose best set and play it
             best_set, reason = get_best_set(possibleSets, topCard)
             payload = payload_builder.buildPayload(lastTake, best_set, reason)
@@ -66,6 +61,8 @@ def kiPlayerAll(hand, topCard):
     return payload #payload
 
 def take():
+    global lastTake
+
     if lastTake == "take":
         lastTake = "nope"
         payload = payload_builder.buildPayload(lastTake, None, "Nope!")
@@ -97,11 +94,11 @@ def main():
         {"type": "number", "color": "yellow-green", "value": 1}
     ]     
     
-    topCard = {"type": "number", "color": "blue", "value": 3}
+    #topCard = {"type": "number", "color": "blue", "value": 3}
     
-    payload = kiPlayerNumbers(hand, topCard)
+    #payload = kiPlayerNumbers(hand, topCard)
     
 
 
 # Call the main function
-main()
+# main()
