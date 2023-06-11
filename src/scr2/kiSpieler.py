@@ -27,24 +27,25 @@ def kiPlayerAll(hand, topCard, lastTopCard):
     topCardValue = topCard["value"]
     topCardType = topCard["type"]
 
+    if topCardType == "see-through":
+        payload = kiPlayerAll(hand, lastTopCard, lastTopCard)
+        return None
+    
     matchingCards = game_rules.get_matching_cards(hand, topCard,only_action_cards=False)
-
-    if matchingCards is None or len(matchingCards) < topCardValue:
+    
+    if matchingCards is None:
         #take
         lastTake, reason = take()
         payload = payload_builder.buildPayload(lastTake, reason)
         return payload
     if topCardType != "number":
-        if topCardType == "see-through":
-            print("FUUUUUCK")
-            payload = kiPlayerAll(hand, lastTopCard, None)
-        else:
-            lastTake = "put"
-            # choose one card from your hand
-            choosen_card, reason = get_best_move(hand, topCard)
-            payload = payload_builder.buildPayload(lastTake, reason, choosen_card)
+        lastTake = "put"
+        # choose one card from your hand
+        choosen_card, reason = choose_card(hand)
+        payload = payload_builder.buildPayload(lastTake, reason, choosen_card)
     else:
         possibleSets = game_rules.get_moves(matchingCards, topCard)
+        
         if possibleSets is None:
             # take
             lastTake, reason = take()
@@ -120,7 +121,7 @@ def choose_card(hand):
         card_move_utility = calculate_move_utility([card], 1)
         if card_move_utility > move_utility:
             move_utility = card_move_utility
-            chosen_card = card
+            chosen_card = [card] # has to be dict since normal moves are also dict
 
     chosen_reason  = "Card with best move_utility: "+ str(move_utility)
     return chosen_card , chosen_reason 
@@ -139,11 +140,11 @@ def main():
         {"type": "number", "color": "red-green", "value": 1}
     ]     
     
-    topCard = {"type": "number", "color": "yellow", "value": 2}
+    topCard = {"type": "number", "color": "green", "value": 3}
     lastTopCard = {"type": "number", "color": "blue", "value": 3}
     
     payload = kiPlayerAll(hand, topCard, lastTopCard)
-    payload2 = kiPlayerAll(hand, topCard, lastTopCard)
+    
 
 # Only execute the main function if the script is run directly
 if __name__ == "__main__":

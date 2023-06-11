@@ -54,7 +54,7 @@ def get_moves(hand, topCard):
     
     setMoves = get_possible_sets(cards, topCard)
     if setMoves is not None:
-        moves.extend([[move] for move in setMoves])
+        moves.extend([move for move in setMoves])
 
     actionCards = get_matching_cards(hand, topCard, only_action_cards=True)
     if actionCards is not None:
