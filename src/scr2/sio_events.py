@@ -63,7 +63,6 @@ def game_state(data, namespace):
 
     console_formater.printGameState(data)
 
-
 @sio.on('game:status')
 def game_status(data, namespace):
     print("GAME STATUS")
