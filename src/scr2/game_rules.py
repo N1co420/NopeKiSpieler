@@ -47,24 +47,27 @@ def get_possible_sets(matchingCards, topCard):
         return None
 
 def get_moves(hand, topCard):
+    moves = []
     cards = get_matching_cards(hand, topCard, only_action_cards=False)
     if cards is None:
         return None
     
-    moves = get_possible_sets(cards, topCard)
+    setMoves = get_possible_sets(cards, topCard)
+    if setMoves is not None:
+        moves.extend([[move] for move in setMoves])
 
     actionCards = get_matching_cards(hand, topCard, only_action_cards=True)
+    if actionCards is not None:
+        moves.extend([[matchingAction] for matchingAction in actionCards])  
     
-    moves.extend([[matchingAction] for matchingAction in actionCards])  
-    
-    if moves is None:
+    if moves is None or len(moves) < topCard["value"]:
         return None
     
     return moves
 
 def testing():
     hand = [
-        {"type": "number", "color": "yellow", "value": 2},
+        {"type": "number", "color": "green", "value": 2},
         {"type": "restart", "color": "red-blue", "value": None},
         {"type": "number", "color": "red-blue", "value": 2},
         {"type": "see-through", "color": "red", "value": None},
@@ -74,14 +77,16 @@ def testing():
         {"type": "number", "color": "red-green", "value": 1}
     ]     
     
-    topCard = {"type": "number", "color": "red-blue", "value": 2}
+    topCard = {"type": "number", "color": "yellow", "value": 2}
     lastTopCard = {"type": "number", "color": "blue", "value": 3}
 
     cards = get_matching_cards(hand, topCard, only_action_cards=False)
-    cardsA = get_matching_cards(hand=hand, topCard=topCard, only_action_cards=True)
-    print("All Cards\n")
-    for card in cards:
-        print(card)
-    print("Action Cards\n")
-    for card in cardsA:
-        print(card)
+    moves = get_moves(cards, topCard)
+
+    if moves is None:
+        print("take")
+    else:
+        for move in moves:
+            print(move)
+
+testing()
