@@ -3,7 +3,7 @@ import requests
 import rest_api
 import tournament_handler
 
-def main():
+def mainMenu():
     # Connect to the server
     user = {"username": "nico2", "password": "654321"}
     result, id = rest_api.login(user)
@@ -40,7 +40,4 @@ def main():
         else:
             print("Invalid choice. Please try again.")
 
-        
-
-
-main()
+mainMenu()
