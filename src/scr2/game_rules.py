@@ -62,7 +62,7 @@ def get_moves(hand, topCard):
     
     return moves
 
-def main():
+def testing():
     hand = [
         {"type": "number", "color": "yellow", "value": 2},
         {"type": "restart", "color": "red-blue", "value": None},
@@ -85,4 +85,3 @@ def main():
     print("Action Cards\n")
     for card in cardsA:
         print(card)
-main()
