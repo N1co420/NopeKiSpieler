@@ -69,8 +69,8 @@ def game_status(data, namespace):
     print(data)
     print(" ")
 
-@sio.on('make:move')
-def make_move(data, namespace):
+@sio.on('game:makeMove')
+def make_move(data):
     print("MAKEMOVE")
     global topCard, hand, last_TopCard
 

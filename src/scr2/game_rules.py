@@ -1,5 +1,4 @@
 from itertools import combinations
-
 def matchingColor(cardColor, topCardColor):
     cardColors = cardColor.split('-')
     topCardColors = topCardColor.split('-')
@@ -10,41 +9,45 @@ def matchingColor(cardColor, topCardColor):
 
     return False
 
+def matchingColor(cardColor, topCardColor):
+    cardColors = cardColor.split('-')
+    for color in cardColors:
+        if color == topCardColor or color =="multi":
+            return True
+    return False
+
 def get_matching_cards(hand, topCard, only_action_cards=False):
     matching_cards = []
-    top_card_color = topCard["color"]
+    top_card_colors = topCard["color"].split('-')
 
-    for card in hand:
-        color = card["color"]
-        if matchingColor(color, top_card_color) and (not only_action_cards or card["type"] != "number"):
-            matching_cards.append(card)
+    for color in top_card_colors:
+        color_matching_cards = []
+        for card in hand:
+            card_color = card["color"]
+            if (
+                card["type"] in ["number", "joker"]
+                and matchingColor(card_color, color)
+                and (not only_action_cards or card["type"] != "number")
+            ):
+                color_matching_cards.append(card)
+        matching_cards.append(color_matching_cards)
 
     return matching_cards
 
-def get_possible_sets(matchingCards, topCard):
-    setSize = topCard["value"]
+def get_possible_sets(matchingCardsList, topCard):
+    set_size = topCard["value"]
+    topCardColors = topCard["color"].split('-')
     possibleSets = []
 
-    Cards = [card for card in matchingCards if card["type"] == "number" or card["type"] == "joker"]
-    cardsCombination = combinations(Cards, setSize)
+    for matchingCards in matchingCardsList:
+        card_combinations = list(combinations(matchingCards, set_size))
+        for combination in card_combinations:
+            if combination not in possibleSets:
+                possibleSets.append(list(combination))
 
-    for combination in cardsCombination:
-        colorsMatch = True
-        for card1 in combination:
-            for card2 in combination:
-                if card1 != card2:
-                    if not matchingColor(card1["color"], card2["color"]) and not card1["type"] == "joker" and not card2["type"] == "joker":
-                        colorsMatch = False
-                        break
-            if not colorsMatch:
-                break
-        if colorsMatch:
-            possibleSets.append(list(combination))          
+    return possibleSets
 
-    if len(possibleSets) > 0:
-        return possibleSets
-    else:
-        return None
+    
 
 def get_moves(hand, topCard):
     moves = []
@@ -66,8 +69,8 @@ def get_moves(hand, topCard):
 
 def testing():
     hand = [
-        {"type": "number", "color": "green", "value": 2},
-        {"type": "restart", "color": "red-blue", "value": None},
+        {"type": "number", "color": "yellow", "value": 2},
+        {"type": "number", "color": "yellow-blue", "value": None},
         {"type": "number", "color": "red-blue", "value": 2},
         {"type": "see-through", "color": "red", "value": None},
         {"type": "number", "color": "blue-green", "value": 3},
@@ -76,10 +79,19 @@ def testing():
         {"type": "number", "color": "red-green", "value": 1}
     ]     
     
-    topCard = {"type": "number", "color": "yellow", "value": 2}
+    topCard = {"type": "number", "color": "yellow-blue", "value": 2}
     lastTopCard = {"type": "number", "color": "blue", "value": 3}
 
-    cards = get_matching_cards(hand, topCard, only_action_cards=False)
-    moves = get_moves(cards, topCard)
+    card_color_list = get_matching_cards(hand, topCard, False)
+
+    sets = get_possible_sets(card_color_list, topCard)
+
+    print("possible sets:   ")
+    for set in sets:
+        print(set)
+        print(" ")
+    
+    
+testing()
 
     

@@ -21,7 +21,6 @@ def buildPayload(move_type, reason, cards=None):
 
     payload["reason"] = reason
     
-    print(payload)
     return payload
 
     
@@ -32,7 +31,3 @@ def create_card_payload(card):
             "value": card["value"]
     }
     
-    
-
-
-# Do stuff for action cards

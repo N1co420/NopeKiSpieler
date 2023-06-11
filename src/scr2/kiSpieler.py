@@ -130,21 +130,22 @@ def main():
     
 
     hand = [
-        {"type": "number", "color": "red-green", "value": 1},
-        {"type": "number", "color": "yellow", "value": 2},
         {"type": "number", "color": "yellow-green", "value": 2},
-        {"type": "number", "color": "red-yellow", "value": 3},
         {"type": "number", "color": "red-green", "value": 3},
-        {"type": "number", "color": "red-blue", "value": 3},
-        {"type": "number", "color": "red", "value": 2},
-        {"type": "number", "color": "red-green", "value": 3}
+        {"type": "number", "color": "blue-green", "value": 2},
+        {"type": "number", "color": "red-green", "value": 2},
+        {"type": "number", "color": "yellow-blue", "value": 2},
+        {"type": "number", "color": "red", "value": 3},
+        {"type": "joker", "color": "multi", "value": 1},
+        {"type": "number", "color": "green", "value": 2}
     ]     
     
-    topCard = {"type": "number", "color": "red", "value": 1}
+    topCard = {"type": "number", "color": "red-yellow", "value": 2}
     lastTopCard = {"type": "number", "color": "blue", "value": 3}
     
-    payload = kiPlayerAll(hand, topCard, lastTopCard)
     
+    payload = kiPlayerAll(hand, topCard, lastTopCard)
+    print(payload)
 
 # Only execute the main function if the script is run directly
 if __name__ == "__main__":
