@@ -34,7 +34,6 @@ def callback(data):
 @sio.on('list:tournaments')
 def socket_tournament(list, namespace):
     tournaments = console_formater.tournament_list(list)
-    print(list)
 
 @sio.on('tournament:playerInfo')
 def socket_playerInfo(data, namespace):
@@ -44,38 +43,40 @@ def socket_playerInfo(data, namespace):
 @sio.on('tournament:info')
 def tourn_info(data, namespace):
     console_formater.printTournInfo(data)
-    print(data)
 
 @sio.on('tournament:status')
 def tourn_status(data, namespace):
     #printFormater.printTournStatus(data)
+    print("TOURN STATUS")
     print(data)
+    print(" ")
 
 @sio.on('game:state')
 def game_state(data, namespace):
-    #printFormater.printGameStatus(state)
     global topCard, hand, last_move, currentPlayer, last_TopCard
-
+    
     topCard = data['topCard']
     last_TopCard = data['lastTopCard']
     last_move = data['lastMove']
     hand = data['hand']
     currentPlayer = data['currentPlayer']
-    
-    if user_id == currentPlayer['id']:
-        print("HANDKARTEN:  ")
-        for card in data['hand']:
-            print(card['type'], card['color'], card['value'])
+
+    console_formater.printGameState(data)
+
 
 @sio.on('game:status')
 def game_status(data, namespace):
+    print("GAME STATUS")
     print(data)
+    print(" ")
 
 @sio.on('make:move')
 def make_move(data, namespace):
+    print("MAKEMOVE")
     global topCard, hand
     print(data['message'])
     move = kiPlayerNumbers(hand, topCard)
     print(move)
+    print(" ")
     time.sleep(0.5)
     return move
