@@ -1,6 +1,16 @@
 from itertools import combinations
 
 def matchingColor(cardColor, topCardColor):
+    """
+    Checks if a card color matches the top card color or if it is a wild card.
+
+    Parameters:
+        cardColor (str): The color of the card.
+        topCardColor (str): The color of the top card.
+
+    Returns:
+        bool: True if the card color matches the top card color or is a wild card, False otherwise.
+    """
     cardColors = cardColor.split('-')
     for color in cardColors:
         if (
@@ -13,6 +23,17 @@ def matchingColor(cardColor, topCardColor):
     return False
 
 def get_matching_cards(hand, topCard, only_action_cards=False):
+    """
+    Retrieves the cards in the hand that match the color of the top card.
+
+    Parameters:
+        hand (list): The list of cards in the hand.
+        topCard (dict): The top card.
+        only_action_cards (bool): Optional. If True, only matching action cards will be returned.
+
+    Returns:
+        list: The list of matching cards or action cards.
+    """
     matching_cards = []
     top_card_colors = topCard["color"].split('-')
 
@@ -45,6 +66,17 @@ def get_matching_cards(hand, topCard, only_action_cards=False):
         return None
 
 def get_possible_sets(matchingCardsList, topCard, joker_count):
+    """
+    Finds all possible sets of cards that can be played based on the matching cards.
+
+    Parameters:
+        matchingCardsList (list): The list of matching cards.
+        topCard (dict): The top card.
+        joker_count (int): The number of joker cards in the hand.
+
+    Returns:
+        list: The list of possible sets of cards.
+    """
     set_size = topCard["value"]
     topCardColors = topCard["color"].split('-')
     possibleSets = []
@@ -63,6 +95,15 @@ def get_possible_sets(matchingCardsList, topCard, joker_count):
     return possibleSets 
 
 def get_joker_count(cards):
+    """
+    Counts the number of joker cards in the given list of cards.
+
+    Parameters:
+        cards (list): The list of cards.
+
+    Returns:
+        int: The number of joker cards.
+    """
     joker_count = 0
     for card in cards:
         if card["type"] == "joker":
@@ -70,6 +111,16 @@ def get_joker_count(cards):
     return joker_count
 
 def get_moves(hand, topCard):
+    """
+    Retrieves the valid moves that can be made based on the current hand and the top card.
+
+    Parameters:
+        hand (list): The list of cards in the hand.
+        topCard (dict): The top card.
+
+    Returns:
+        list: The list of valid moves.
+    """
     moves = []
     cards = get_matching_cards(hand, topCard, only_action_cards=False)
     actionCards = get_matching_cards(hand, topCard, only_action_cards=True)
@@ -90,16 +141,5 @@ def get_moves(hand, topCard):
         return None
     return moves
 
-def testing():
-    hand = [
-        {"type": "see-through", "color": "blue", "value": None},
-        {"type": "number", "color": "red", "value": 2}
-    ]     
-    
-    topCard = {"type": "number", "color": "blue-green", "value": 2}
-    lastTopCard = {"type": "number", "color": "blue-green", "value": 1}
-    topCardColor = topCard["color"]
-
-    
 
     
