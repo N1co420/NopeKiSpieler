@@ -90,7 +90,7 @@ def get_moves(hand, topCard):
     actionCards = get_matching_cards(hand,topCard, only_action_cards=True)
     if actionCards is not None:
         moves.extend([move for move in actionCards])
-     
+    
     if moves is None:
         return None
     return moves

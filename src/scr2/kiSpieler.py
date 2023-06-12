@@ -28,34 +28,18 @@ def kiPlayerAll(hand, topCard, lastTopCard):
     topCardType = topCard["type"]
 
     if topCardType == "see-through":
-        payload = kiPlayerAll(hand, lastTopCard, lastTopCard)
-        return None
+        kiPlayerAll(hand, lastTopCard, lastTopCard)
     
-    matchingCards = game_rules.get_matching_cards(hand, topCard,only_action_cards=False)
+    moves = game_rules.get_moves(hand, topCard)
     
-    if matchingCards is None:
-        #take
+    if moves is None or len(moves) < 1:
         lastTake, reason = take()
-        payload = payload_builder.buildPayload(lastTake, reason)
-        return payload
-    if topCardType != "number":
-        lastTake = "put"
-        # choose one card from your hand
-        choosen_card, reason = choose_card(hand)
-        payload = payload_builder.buildPayload(lastTake, reason, choosen_card)
+        payload = payload_builder.buildPayload(lastTake, reason, None)
     else:
-        possibleSets = game_rules.get_moves(matchingCards, topCard)
-        
-        if possibleSets is None:
-            # take
-            lastTake, reason = take()
-            payload = payload_builder.buildPayload(lastTake, reason)
-            return payload
-        else:
-            lastTake = "put"
-            # Choose best set and play it
-            best_set, reason = get_best_move(possibleSets, topCard)
-            payload = payload_builder.buildPayload(lastTake, reason, best_set)
+        lastTake = "put"
+        best_move, reason = get_best_move(moves, topCard)
+        payload = payload_builder.buildPayload(lastTake, reason, best_move)
+
     return payload
 
 def calculate_move_utility(move, top_card_value):
@@ -130,23 +114,26 @@ def main():
     
 
     hand = [
-        {"type": "see-through", "color": "yellow-green", "value": 2},
-        {"type": "number", "color": "red-green", "value": 3},
+        {"type": "number", "color": "red-yellow", "value": 3},
+        {"type": "number", "color": "red", "value": 2},
+        {"type": "number", "color": "green", "value": 3},
+        {"type": "number", "color": "blue-green", "value": 2},
+        {"type": "number", "color": "yellow-blue", "value": 2},
+        {"type": "number", "color": "red-blue", "value": 1},
         {"type": "number", "color": "red-green", "value": 2},
-        {"type": "number", "color": "red-green", "value": 2},
-        {"type": "number", "color": "yellow-red", "value": 2},
-        {"type": "restart", "color": "red", "value": 3},
-        {"type": "joker", "color": "multi", "value": 1},
-        {"type": "joker", "color": "multi", "value": 1}
+        {"type": "number", "color": "red-blue", "value": 3}
     ]     
     
-    topCard = {"type": "number", "color": "blue", "value": 2}
+    topCard = {"type": "number", "color": "yellow", "value": 3}
     lastTopCard = {"type": "number", "color": "blue", "value": 3}
     
-    moves = game_rules.get_matching_cards(hand, topCard, False)
+    #list = game_rules.get_matching_cards(hand, topCard, only_action_cards=False)
 
-    set = game_rules.get_possible_sets(moves, topCard)
-    print(set)
+    #sets = game_rules.get_possible_sets(list, topCard, 0)
+
+    #moves = game_rules.get_moves(hand, topCard)
+
+    
     
 # Only execute the main function if the script is run directly
 if __name__ == "__main__":
