@@ -68,4 +68,5 @@ Die Datei `sio_events.py` enthält Event-Handler-Funktionen für Ereignisse, die
     - Gibt den generierten Zug aus und gibt ihn zurück.
 
 
-Um zum Hauptmenü zurückzukehren, klicken Sie [hier](main_menu.md).
+
+Um zum Hauptmenü zurückzukehren, klicken Sie [hier](../README.md).

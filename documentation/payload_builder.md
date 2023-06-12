@@ -14,4 +14,5 @@ Die Datei `payload_builder.py` enthält Funktionen zum Erstellen von Nutzlasten 
    - Gibt das Karten-Nutzlast-Wörterbuch zurück.
 
 
-Um zum Hauptmenü zurückzukehren, klicken Sie [hier](main_menu.md).
+
+Um zum Hauptmenü zurückzukehren, klicken Sie [hier](../README.md).

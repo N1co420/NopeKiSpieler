@@ -46,5 +46,6 @@ Ermittelt alle möglichen Kartensätze, die auf Grundlage der passenden Karten g
 - `list`: Die Liste der möglichen Kartensätze.
 
 
-Um zum Hauptmenü zurückzukehren, klicken Sie [hier](main_menu.md).
+
+Um zum Hauptmenü zurückzukehren, klicken Sie [hier](../README.md).
 

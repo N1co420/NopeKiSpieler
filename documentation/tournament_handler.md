@@ -41,4 +41,5 @@ Die Datei `tournament_handler.py` enthält Funktionen zum Interagieren mit Turni
    - Gibt eine Fehlermeldung aus, wenn das Verlassen des Turniers fehlschlägt.
 
 
-Um zum Hauptmenü zurückzukehren, klicken Sie [hier](main_menu.md).
+
+Um zum Hauptmenü zurückzukehren, klicken Sie [hier](../README.md).

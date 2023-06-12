@@ -37,4 +37,4 @@ Hinweis: Stellen Sie sicher, dass Sie die richtige URL für die RESTful-API in d
 
 
 
-Um zum Hauptmenü zurückzukehren, klicken Sie [hier](main_menu.md).
+Um zum Hauptmenü zurückzukehren, klicken Sie [hier](../README.md).
