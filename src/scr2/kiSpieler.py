@@ -30,6 +30,11 @@ def kiPlayerAll(hand, topCard, lastTopCard):
     if topCardType == "see-through":
         payload = kiPlayerAll(hand, lastTopCard, lastTopCard)
         return payload
+    elif topCardType == "restart":
+        lastTake = "put"
+        move, reason = choose_card(hand)
+        payload = payload_builder.buildPayload(lastTake, reason, move)
+        return payload
     
     moves = game_rules.get_moves(hand, topCard)
     
@@ -123,21 +128,17 @@ def main():
         {"type": "number", "color": "red3", "value": 3}
     ]     
     
-    topCard = {"type": "joker", "color": "multi", "value": 1}
+    topCard = {"type": "restart", "color": "blue", "value": None}
     lastTopCard = {"type": "number", "color": "blue-green", "value": 1}
     topCardColor = topCard["color"]
-    
-
-    
 
     #sets = game_rules.get_possible_sets(list, topCard, 0)
 
     #moves = game_rules.get_moves(hand, topCard)
 
-    payload = kiPlayerAll(hand, topCard, lastTopCard)
-
-    print(payload)
+    move = kiPlayerAll(hand, topCard, lastTopCard)
     
+    print(move)
     
 # Only execute the main function if the script is run directly
 if __name__ == "__main__":
