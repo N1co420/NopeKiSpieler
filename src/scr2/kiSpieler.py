@@ -130,12 +130,12 @@ def main():
     
 
     hand = [
-        {"type": "number", "color": "yellow-green", "value": 2},
+        {"type": "see-through", "color": "yellow-green", "value": 2},
         {"type": "number", "color": "red-green", "value": 3},
         {"type": "number", "color": "blue-green", "value": 2},
         {"type": "number", "color": "red-green", "value": 2},
         {"type": "number", "color": "yellow-blue", "value": 2},
-        {"type": "number", "color": "red", "value": 3},
+        {"type": "restart", "color": "red", "value": 3},
         {"type": "joker", "color": "multi", "value": 1},
         {"type": "number", "color": "green", "value": 2}
     ]     
@@ -143,10 +143,9 @@ def main():
     topCard = {"type": "number", "color": "red-yellow", "value": 2}
     lastTopCard = {"type": "number", "color": "blue", "value": 3}
     
-    
-    payload = kiPlayerAll(hand, topCard, lastTopCard)
-    print(payload)
 
+    actionCards = game_rules.get_matching_cards(hand, topCard, only_action_cards=True)
+    print(actionCards)
 # Only execute the main function if the script is run directly
 if __name__ == "__main__":
     main()
