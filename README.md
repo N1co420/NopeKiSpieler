@@ -12,11 +12,6 @@ https://spiced-bayberry-f17.notion.site/Projekttagebuch-d291802969b9402bb81d8966
 
 https://spiced-bayberry-f17.notion.site/KI-Spieler-7044f2518dd54e749bcaaaaa02f1242d
 
-
-https://spiced-bayberry-f17.notion.site/Projekttagebuch-d291802969b9402bb81d89667fd50842
-
-https://spiced-bayberry-f17.notion.site/KI-Spieler-7044f2518dd54e749bcaaaaa02f1242d
-
 # python-ki player
 
 Dieses Projekt enthält den Quellcode und die Dokumentation für das Spielprojekt.
