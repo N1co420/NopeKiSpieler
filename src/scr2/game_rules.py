@@ -72,39 +72,41 @@ def get_joker_count(cards):
 def get_moves(hand, topCard):
     moves = []
     cards = get_matching_cards(hand, topCard, only_action_cards=False)
-    if cards is None:
+    actionCards = get_matching_cards(hand, topCard, only_action_cards=True)
+    if cards is None and actionCards is None:
         return None
     
-    jokers = get_joker_count(hand)
+    if cards is not None:
+        jokers = get_joker_count(hand)
+        setMoves = get_possible_sets(cards, topCard, jokers)
     
-    setMoves = get_possible_sets(cards, topCard, jokers)
+        if setMoves is not None:
+            moves.extend([move for move in setMoves]) 
     
-    if setMoves is not None:
-        moves.extend([move for move in setMoves]) 
-    
-    actionCards = get_matching_cards(hand,topCard, only_action_cards=True)
     if actionCards is not None:
         moves.extend([move for move in actionCards])
-    
+
     if moves is None:
         return None
     return moves
 
 def testing():
     hand = [
-        {"type": "number", "color": "red-green", "value": 3},
-        {"type": "number", "color": "red-blue", "value": 2},
-        {"type": "number", "color": "red-blue", "value": 1},
-        {"type": "number", "color": "red-blue", "value": 1},
-        {"type": "number", "color": "blue", "value": 2},
-        {"type": "number", "color": "red", "value": 3}
+        {"type": "see-through", "color": "blue", "value": None},
+        {"type": "number", "color": "red", "value": 2}
     ]     
     
-    topCard = {"type": "joker", "color": "multi", "value": 1}
+    topCard = {"type": "number", "color": "blue-green", "value": 2}
     lastTopCard = {"type": "number", "color": "blue-green", "value": 1}
     topCardColor = topCard["color"]
 
-    
+    actions = get_matching_cards(hand, topCard, only_action_cards=True)
+
+    moves = get_moves(hand, topCard)
+
+    print(moves)# Hier ist moves leer
+
+testing()
 
 
     
