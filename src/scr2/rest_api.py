@@ -1,6 +1,7 @@
 import requests
 import json
 
+user_id = None
 
 # This function sends a POST request to register a new user with the server
 def register(json_data):
@@ -28,6 +29,8 @@ def login(data):
     if response.status_code == 200:
         # Extract the access token from the response JSON
         json_response = response.json()
+
+        global user_id
         access_token = json_response["accessToken"]
         user_id = json_response["user"]["id"]
         return access_token, user_id
@@ -58,10 +61,3 @@ def call_register():
     result = register(data)
     # Print the result of the registration attempt
     print(result)
-
-
-def main():
-    call_login()
-    print("done")
-
-main()
