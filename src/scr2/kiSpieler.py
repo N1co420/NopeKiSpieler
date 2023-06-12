@@ -132,19 +132,21 @@ def main():
     hand = [
         {"type": "see-through", "color": "yellow-green", "value": 2},
         {"type": "number", "color": "red-green", "value": 3},
-        {"type": "number", "color": "blue-green", "value": 2},
         {"type": "number", "color": "red-green", "value": 2},
-        {"type": "number", "color": "yellow-blue", "value": 2},
+        {"type": "number", "color": "red-green", "value": 2},
+        {"type": "number", "color": "yellow-red", "value": 2},
         {"type": "restart", "color": "red", "value": 3},
         {"type": "joker", "color": "multi", "value": 1},
-        {"type": "number", "color": "green", "value": 2}
+        {"type": "joker", "color": "multi", "value": 1}
     ]     
     
-    topCard = {"type": "number", "color": "red-yellow", "value": 2}
+    topCard = {"type": "number", "color": "blue", "value": 2}
     lastTopCard = {"type": "number", "color": "blue", "value": 3}
     
-    moves = game_rules.get_moves(hand, topCard)
-    
+    moves = game_rules.get_matching_cards(hand, topCard, False)
+
+    set = game_rules.get_possible_sets(moves, topCard)
+    print(set)
     
 # Only execute the main function if the script is run directly
 if __name__ == "__main__":

@@ -49,7 +49,7 @@ def get_matching_cards(hand, topCard, only_action_cards=False):
     else:
         return None
 
-def get_possible_sets(matchingCardsList, topCard):
+def get_possible_sets(matchingCardsList, topCard, joker_count):
     set_size = topCard["value"]
     topCardColors = topCard["color"].split('-')
     possibleSets = []
@@ -60,7 +60,19 @@ def get_possible_sets(matchingCardsList, topCard):
             if combination not in possibleSets:
                 possibleSets.append(list(combination))
 
+    if joker_count == set_size:
+        joker_combination = [{"type": "joker", "color": "multi", "value": 1}] * set_size
+        if joker_combination not in possibleSets:
+            possibleSets.append(joker_combination)
+
     return possibleSets 
+
+def get_joker_count(cards):
+    joker_count = 0
+    for card in cards:
+        if card["type"] == "joker":
+            joker_count += 1
+    return joker_count
 
 def get_moves(hand, topCard):
     moves = []
@@ -68,20 +80,43 @@ def get_moves(hand, topCard):
     if cards is None:
         return None
     
-    setMoves = get_possible_sets(cards, topCard)
+    jokers = get_joker_count(hand)
+    
+    setMoves = get_possible_sets(cards, topCard, jokers)
+    
     if setMoves is not None:
         moves.extend([move for move in setMoves]) 
     
     actionCards = get_matching_cards(hand,topCard, only_action_cards=True)
     if actionCards is not None:
         moves.extend([move for move in actionCards])
-    if moves is None or len(moves) < topCard["value"]:
+     
+    if moves is None:
         return None
     return moves
 
-
-
+def testing():
+    hand = [
+        {"type": "joker", "color": "multi", "value": 1},
+        {"type": "number", "color": "red-green", "value": 3},
+        {"type": "number", "color": "red-green", "value": 2},
+        {"type": "number", "color": "red-green", "value": 2},
+        {"type": "number", "color": "yellow-red", "value": 2},
+        {"type": "restart", "color": "red", "value": 3},
+        {"type": "joker", "color": "multi", "value": 1},
+        {"type": "joker", "color": "multi", "value": 1}
+    ]     
     
+    topCard = {"type": "number", "color": "blue", "value": 3}
+    lastTopCard = {"type": "number", "color": "blue", "value": 3}
+
+    moves = get_moves(hand, topCard)
+
+    for move in moves:
+        print(move)
+    
+
+testing()
 
 
 
