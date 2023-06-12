@@ -2,19 +2,14 @@ from itertools import combinations
 
 def matchingColor(cardColor, topCardColor):
     cardColors = cardColor.split('-')
-    topCardColors = topCardColor.split('-')
-
     for color in cardColors:
-        if color in topCardColors or color == "multi":
+        if (
+            color == topCardColor 
+            or color =="multi" 
+            or topCardColor == "multi"
+        ):
             return True
-
-    return False
-
-def matchingColor(cardColor, topCardColor):
-    cardColors = cardColor.split('-')
-    for color in cardColors:
-        if color == topCardColor or color =="multi":
-            return True
+        
     return False
 
 def get_matching_cards(hand, topCard, only_action_cards=False):
@@ -95,8 +90,21 @@ def get_moves(hand, topCard):
         return None
     return moves
 
+def testing():
+    hand = [
+        {"type": "number", "color": "red-green", "value": 3},
+        {"type": "number", "color": "red-blue", "value": 2},
+        {"type": "number", "color": "red-blue", "value": 1},
+        {"type": "number", "color": "red-blue", "value": 1},
+        {"type": "number", "color": "blue", "value": 2},
+        {"type": "number", "color": "red", "value": 3}
+    ]     
+    
+    topCard = {"type": "joker", "color": "multi", "value": 1}
+    lastTopCard = {"type": "number", "color": "blue-green", "value": 1}
+    topCardColor = topCard["color"]
 
-
+    
 
 
     

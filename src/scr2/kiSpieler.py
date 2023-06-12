@@ -28,8 +28,6 @@ def kiPlayerAll(hand, topCard, lastTopCard):
     topCardType = topCard["type"]
 
     if topCardType == "see-through":
-        print("Take LAST TOPCARD")
-        print(lastTopCard)
         payload = kiPlayerAll(hand, lastTopCard, lastTopCard)
         return payload
     
@@ -125,10 +123,12 @@ def main():
         {"type": "number", "color": "red3", "value": 3}
     ]     
     
-    topCard = {"type": "see-through", "color": "green", "value": None}
+    topCard = {"type": "joker", "color": "multi", "value": 1}
     lastTopCard = {"type": "number", "color": "blue-green", "value": 1}
+    topCardColor = topCard["color"]
     
-    #list = game_rules.get_matching_cards(hand, topCard, only_action_cards=False)
+
+    
 
     #sets = game_rules.get_possible_sets(list, topCard, 0)
 
