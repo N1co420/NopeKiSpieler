@@ -28,7 +28,10 @@ def kiPlayerAll(hand, topCard, lastTopCard):
     topCardType = topCard["type"]
 
     if topCardType == "see-through":
-        kiPlayerAll(hand, lastTopCard, lastTopCard)
+        print("Take LAST TOPCARD")
+        print(lastTopCard)
+        payload = kiPlayerAll(hand, lastTopCard, lastTopCard)
+        return payload
     
     moves = game_rules.get_moves(hand, topCard)
     
@@ -114,18 +117,16 @@ def main():
     
 
     hand = [
-        {"type": "number", "color": "red-yellow", "value": 3},
-        {"type": "number", "color": "red", "value": 2},
-        {"type": "number", "color": "green", "value": 3},
-        {"type": "number", "color": "blue-green", "value": 2},
-        {"type": "number", "color": "yellow-blue", "value": 2},
+        {"type": "number", "color": "red-green", "value": 3},
+        {"type": "number", "color": "red-blue", "value": 2},
         {"type": "number", "color": "red-blue", "value": 1},
-        {"type": "number", "color": "red-green", "value": 2},
-        {"type": "number", "color": "red-blue", "value": 3}
+        {"type": "number", "color": "red-blue", "value": 1},
+        {"type": "number", "color": "blue", "value": 2},
+        {"type": "number", "color": "red3", "value": 3}
     ]     
     
-    topCard = {"type": "number", "color": "yellow", "value": 3}
-    lastTopCard = {"type": "number", "color": "blue", "value": 3}
+    topCard = {"type": "see-through", "color": "green", "value": None}
+    lastTopCard = {"type": "number", "color": "blue-green", "value": 1}
     
     #list = game_rules.get_matching_cards(hand, topCard, only_action_cards=False)
 
@@ -133,6 +134,9 @@ def main():
 
     #moves = game_rules.get_moves(hand, topCard)
 
+    payload = kiPlayerAll(hand, topCard, lastTopCard)
+
+    print(payload)
     
     
 # Only execute the main function if the script is run directly
