@@ -1,4 +1,5 @@
 from itertools import combinations
+
 def matchingColor(cardColor, topCardColor):
     cardColors = cardColor.split('-')
     topCardColors = topCardColor.split('-')
@@ -69,35 +70,19 @@ def get_moves(hand, topCard):
     
     setMoves = get_possible_sets(cards, topCard)
     if setMoves is not None:
-        moves.append([move for move in setMoves]) 
+        moves.extend([move for move in setMoves]) 
     
     actionCards = get_matching_cards(hand,topCard, only_action_cards=True)
     if actionCards is not None:
-        moves.append([move for move in actionCards])
+        moves.extend([move for move in actionCards])
     if moves is None or len(moves) < topCard["value"]:
         return None
     return moves
 
-def testing():
-    hand = [
-        {"type": "restart", "color": "yellow", "value": 2},
-        {"type": "number", "color": "yellow-blue", "value": None},
-        {"type": "number", "color": "red-blue", "value": 2},
-        {"type": "see-through", "color": "yellow", "value": None},
-        {"type": "number", "color": "blue-green", "value": 3},
-        {"type": "number", "color": "red", "value": 1},
-        {"type": "joker", "color": "multi", "value": 1},
-        {"type": "number", "color": "red-green", "value": 1}
-    ]     
+
+
     
-    topCard = {"type": "number", "color": "yellow-blue", "value": 2}
-    lastTopCard = {"type": "number", "color": "blue", "value": 3}
 
-    actioncard = get_matching_cards(hand, topCard, only_action_cards=True)
-
-    print(actioncard)
-
-testing()
 
 
     

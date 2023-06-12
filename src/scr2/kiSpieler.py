@@ -143,9 +143,9 @@ def main():
     topCard = {"type": "number", "color": "red-yellow", "value": 2}
     lastTopCard = {"type": "number", "color": "blue", "value": 3}
     
-
-    actionCards = game_rules.get_matching_cards(hand, topCard, only_action_cards=True)
-    print(actionCards)
+    moves = game_rules.get_moves(hand, topCard)
+    
+    
 # Only execute the main function if the script is run directly
 if __name__ == "__main__":
     main()
