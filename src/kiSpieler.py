@@ -184,26 +184,26 @@ def main():
     
 
     hand = [
-        {"type": "number", "color": "red-green", "value": 3},
-        {"type": "number", "color": "red-blue", "value": 2},
-        {"type": "number", "color": "red-blue", "value": 1},
-        {"type": "number", "color": "red-blue", "value": 1},
-        {"type": "number", "color": "blue", "value": 2},
-        {"type": "number", "color": "red3", "value": 3}
+        {"type": "reboot", "color": "red-green", "value": 3},
+        {"type": "reboot", "color": "red-blue", "value": 2},
+        {"type": "reboot", "color": "red-blue", "value": 1},
+        {"type": "reboot", "color": "red-blue", "value": 1},
+        {"type": "reboot", "color": "blue", "value": 2},
+        {"type": "reboot", "color": "red3", "value": 3}
     ]     
     
-    topCard = {"type": "reboot", "color": "blue", "value": None}
+    topCard = {"type": "number", "color": "blue", "value": 2}
     lastTopCard = {"type": "number", "color": "blue-green", "value": 1}
     topCardColor = topCard["color"]
 
     #sets = game_rules.get_possible_sets(list, topCard, 0)
 
     #moves = game_rules.get_moves(hand, topCard)
+    
 
     move = kiPlayerAll(hand, topCard, lastTopCard)
-    
-    print(move)
 
+    print(move)
 # Only execute the main function if the script is run directly
 if __name__ == "__main__":
     main()

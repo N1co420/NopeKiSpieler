@@ -84,7 +84,8 @@ def get_possible_sets(matchingCardsList, topCard, joker_count):
     for matchingCards in matchingCardsList:
         card_combinations = list(combinations(matchingCards, set_size))
         for combination in card_combinations:
-            if combination not in possibleSets:
+            print(combination)
+            if (combination not in possibleSets) :
                 possibleSets.append(list(combination))
 
     if joker_count == set_size:
@@ -135,11 +136,12 @@ def get_moves(hand, topCard):
             moves.extend([move for move in setMoves]) 
     
     if actionCards is not None:
-        moves.extend([move for move in actionCards])
+        for card in actionCards:
+            for c in card: #Somehow this needs to be done to split the list correctly
+                moves.append([c])
 
     if moves is None:
         return None
     return moves
 
 
-    
