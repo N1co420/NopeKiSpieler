@@ -95,28 +95,7 @@ def get_moves(hand, topCard):
         return None
     return moves
 
-def testing():
-    hand = [
-        {"type": "joker", "color": "multi", "value": 1},
-        {"type": "number", "color": "red-green", "value": 3},
-        {"type": "number", "color": "red-green", "value": 2},
-        {"type": "number", "color": "red-green", "value": 2},
-        {"type": "number", "color": "yellow-red", "value": 2},
-        {"type": "restart", "color": "red", "value": 3},
-        {"type": "joker", "color": "multi", "value": 1},
-        {"type": "joker", "color": "multi", "value": 1}
-    ]     
-    
-    topCard = {"type": "number", "color": "blue", "value": 3}
-    lastTopCard = {"type": "number", "color": "blue", "value": 3}
 
-    moves = get_moves(hand, topCard)
-
-    for move in moves:
-        print(move)
-    
-
-testing()
 
 
 
