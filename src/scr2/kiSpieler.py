@@ -30,7 +30,7 @@ def kiPlayerAll(hand, topCard, lastTopCard):
     if topCardType == "see-through":
         payload = kiPlayerAll(hand, lastTopCard, lastTopCard)
         return payload
-    elif topCardType == "restart":
+    elif topCardType == "reboot":
         lastTake = "put"
         move, reason = choose_card(hand)
         payload = payload_builder.buildPayload(lastTake, reason, move)
@@ -128,7 +128,7 @@ def main():
         {"type": "number", "color": "red3", "value": 3}
     ]     
     
-    topCard = {"type": "restart", "color": "blue", "value": None}
+    topCard = {"type": "reboot", "color": "blue", "value": None}
     lastTopCard = {"type": "number", "color": "blue-green", "value": 1}
     topCardColor = topCard["color"]
 
@@ -139,7 +139,7 @@ def main():
     move = kiPlayerAll(hand, topCard, lastTopCard)
     
     print(move)
-    
+
 # Only execute the main function if the script is run directly
 if __name__ == "__main__":
     main()
