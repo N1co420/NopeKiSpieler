@@ -127,7 +127,7 @@ def get_best_move(possibleSets, topCard):
     """
     best_move = None
     bestmove_value = 100
-    reason = "Fuck you"
+    
     topCardValue =  topCard["value"]
 
     for move in possibleSets:
@@ -136,6 +136,7 @@ def get_best_move(possibleSets, topCard):
             bestmove_value = move_value
             best_move = move
 
+    reason = "Best Move utility:  ", str(move_value)
     return best_move, reason
         
 def take():
@@ -177,7 +178,7 @@ def choose_card(hand):
             move_utility = card_move_utility
             chosen_card = [card] # has to be dict since normal moves are also dict
 
-    chosen_reason  = "Card with best move_utility: "+ str(move_utility)
+    chosen_reason  = "Card with best move_utility: ", str(move_utility)
     return chosen_card , chosen_reason 
 
 def main():
