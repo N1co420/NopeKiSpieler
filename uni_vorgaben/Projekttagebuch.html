@@ -1,0 +1,677 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Projekttagebuch</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="d2918029-69b9-402b-b81d-89667fd50842" class="page sans"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/met_william_morris_1875.jpg" style="object-position:center 0%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">📘</span></div><h1 class="page-title">Projekttagebuch</h1><p class="page-description"></p></header><div class="page-body"><p id="1b5fab63-b5ce-4125-8eec-10f5f8672ed9" class="">Woche 1:</p><ul id="23a27055-b4cf-495b-84a8-0f19832443db" class="bulleted-list"><li style="list-style-type:disc">Ehrenamtschulung → Keine Anwesenheit</li></ul><h1 id="81fdc679-9433-4fc0-8835-77145738e5ed" class="">Woche 2 [10.04.2023 - 16.04.2023]</h1><ul id="63bdf3ee-1df3-4421-be65-9147b88d0d2f" class="bulleted-list"><li style="list-style-type:disc">Nacharbeiten des Projekteinstiegs!!! </li></ul><table id="da231a21-9fee-4078-a977-76a23af7765f" class="simple-table"><tbody><tr id="babb7fd5-3fe3-4d19-9d3f-fc73a65f9289"><td id=":wz}" class="" style="width:95.65625px">Datum</td><td id="&lt;`dL" class="" style="width:529.65625px">Tätigkeit</td><td id="m]Vf" class="" style="width:69.65625px">Dauer</td></tr><tr id="6a3e4f68-5083-4bd0-be3d-b39579915cc6"><td id=":wz}" class="" style="width:95.65625px">11.04.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Teambesprechung Technologien und Serverstrukturen</td><td id="m]Vf" class="" style="width:69.65625px">1,0 h</td></tr><tr id="99089555-cb95-4697-ae77-52bd5dd70992"><td id=":wz}" class="" style="width:95.65625px">11.04.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Recherche zu Verwendeten Technologien/Frameworks</td><td id="m]Vf" class="" style="width:69.65625px">1,5 h</td></tr><tr id="1d94eeaf-2744-4b0a-a84f-30cdbf905810"><td id=":wz}" class="" style="width:95.65625px">11.04.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Persönliche Roadmap und Arbeitsstrukturen ausarbeiten</td><td id="m]Vf" class="" style="width:69.65625px">3,5 h</td></tr><tr id="93e85b25-f1c6-4b67-966c-69376393d21f"><td id=":wz}" class="" style="width:95.65625px">12.04.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Implementierung simpler REST API Login und Registrierung</td><td id="m]Vf" class="" style="width:69.65625px">1,0 h</td></tr><tr id="4f9af2e2-ebfe-4c23-ab66-cdd6c1acfe11"><td id=":wz}" class="" style="width:95.65625px"></td><td id="&lt;`dL" class="" style="width:529.65625px"></td><td id="m]Vf" class="" style="width:69.65625px">7,0 h</td></tr></tbody></table><h1 id="fba4c4a8-5df4-4f95-b082-97462687bd75" class="">Woche 3 [17.04.2023 - 23.04.2023]</h1><table id="2c39e863-a422-450e-8aca-44231916a49a" class="simple-table"><tbody><tr id="6424126b-c7de-4e0c-b5eb-acb2e247769c"><td id=":wz}" class="" style="width:95.65625px">Datum</td><td id="&lt;`dL" class="" style="width:529.65625px">Tätigkeit</td><td id="m]Vf" class="" style="width:69.65625px">Dauer</td></tr><tr id="532efcef-a6e6-4564-ab90-7a6956f257e7"><td id=":wz}" class="" style="width:95.65625px">18.04.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Gruppenmeeting</td><td id="m]Vf" class="" style="width:69.65625px">2,0 h</td></tr><tr id="f83fc71d-cf2a-4482-bed2-15482cbfca05"><td id=":wz}" class="" style="width:95.65625px">18.04.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Bugfixing an GUI → Button und Funktionsverknüpfung</td><td id="m]Vf" class="" style="width:69.65625px">1,0 h</td></tr><tr id="05989cd5-47d4-488a-983a-d733dd90d02c"><td id=":wz}" class="" style="width:95.65625px">19.04.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">GUI Verknüpfung mit REST API → User Input in JSON Data transformieren</td><td id="m]Vf" class="" style="width:69.65625px">1,0 h</td></tr><tr id="6d2145f7-fbfa-4c32-8ff3-533d7d1bc114"><td id=":wz}" class="" style="width:95.65625px">20.04.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Gruppenmeeting (Festlegen der Client-Server Kommunikation)</td><td id="m]Vf" class="" style="width:69.65625px">2,0 h</td></tr><tr id="8f104872-8950-45a1-84a0-a2f23b006bec"><td id=":wz}" class="" style="width:95.65625px"></td><td id="&lt;`dL" class="" style="width:529.65625px"></td><td id="m]Vf" class="" style="width:69.65625px">6,0 h</td></tr></tbody></table><h3 id="7f716838-ffdf-40ea-bd51-aa101b7aa3ab" class=""><mark class="highlight-red_background">Probleme und deren Lösung:</mark></h3><ul id="b84882ac-25a9-4730-9369-eaa2ac78b0a2" class="bulleted-list"><li style="list-style-type:disc">Der Funktionsaufruf wenn ein Button in Tkinter gedrückt wird funktioniert nicht<ul id="0282731e-813a-4fdd-b433-9f132629cd84" class="bulleted-list"><li style="list-style-type:circle">Lösung: Funktionsaufruf muss mit einer Lambda Funktion versehen werden</li></ul></li></ul><ul id="e7116100-fbe9-4c0e-8362-8ae11c44c4ed" class="bulleted-list"><li style="list-style-type:disc">Übergabe der User Inputs aus der GUI in die Login/Register Funktionen funktioniert nicht, da falsche Datenformate verwendet werden → StringVar zu Json Data<ul id="f71228f4-302c-4310-ad95-613115a87d2f" class="bulleted-list"><li style="list-style-type:circle">Lösung: Implementierung einer Transform2JsonData Methode, die Datentransformierung übernimmt. </li></ul></li></ul><ul id="76b170ed-3951-4f65-9249-50595bf1580d" class="bulleted-list"><li style="list-style-type:disc">Transformierungsproblem: Login und Register benötigen unterschiedliche Json Data → Register braucht auch noch first und Lastname<ul id="56c9c58a-69a2-49b8-a92d-78663611d469" class="bulleted-list"><li style="list-style-type:circle">Lösung: Erweiterung der Transform2JsonData Methode, die firstname und lastname als Optionale Paramter einbindet</li></ul></li></ul><ul id="3cbe9a45-e708-426d-a7c0-ae1930c8ba40" class="bulleted-list"><li style="list-style-type:disc">Gruppenmeeting zum Festlegen der Client-Server Kommunikation und Datenpakete für die KI Spieler konnte in 2 Stunden nicht alles besprechen<ul id="4495c702-f5c5-4ab0-ade3-e72f92304c83" class="bulleted-list"><li style="list-style-type:circle">Lösung: Ein weiteres Meeting nächsten Dienstag</li></ul></li></ul><h1 id="8a538356-fb49-4f5b-96c4-774bda9a6172" class="">Woche 4 [24.04.2023 - 30.04.2023]</h1><table id="4c72d1df-8e40-4fb2-bb00-57273f9db0cc" class="simple-table"><tbody><tr id="d9bc270e-9f81-452d-9b85-6503d4ef550a"><td id=":wz}" class="" style="width:95.65625px">Datum</td><td id="&lt;`dL" class="" style="width:529.65625px">Tätigkeit</td><td id="m]Vf" class="" style="width:69.65625px">Dauer</td></tr><tr id="87e34463-8bc7-4754-a72d-ccafb3082369"><td id=":wz}" class="" style="width:95.65625px">25.04.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Gruppenmeeting2 (Festlegen der Client-Server Kommunikation)</td><td id="m]Vf" class="" style="width:69.65625px">1,5 h</td></tr><tr id="3e6bdb3d-a450-4745-81f1-3850783e06d5"><td id=":wz}" class="" style="width:95.65625px">25.04.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Server Register Problem: Mein User existiert im Server nicht mehr!</td><td id="m]Vf" class="" style="width:69.65625px">0,5 h</td></tr><tr id="ecc4a655-d2d2-4978-bcb6-58977efe3ec6"><td id=":wz}" class="" style="width:95.65625px">25.04.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Bugfixing JsonData Input Bug!!!</td><td id="m]Vf" class="" style="width:69.65625px">1,0 h</td></tr><tr id="f017044e-0c96-4d09-a671-30aa5b7e4981"><td id=":wz}" class="" style="width:95.65625px">27.04.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Lösung des JsonData Input Bugs </td><td id="m]Vf" class="" style="width:69.65625px">1,5</td></tr><tr id="f53f4036-4f64-4e60-b8e6-69599d03af1c"><td id=":wz}" class="" style="width:95.65625px"></td><td id="&lt;`dL" class="" style="width:529.65625px"></td><td id="m]Vf" class="" style="width:69.65625px">4,5 h</td></tr></tbody></table><p id="a19ce125-aa0a-4721-9ac9-3c0aebd70fde" class="">Probleme und Lösungen:</p><ul id="3ba0af95-2288-42d3-af8a-c1a80f7f9adf" class="bulleted-list"><li style="list-style-type:disc">Mein Registrierter User kann nichtmehr eingeloggt werden<ul id="0b3d0997-eb01-4b64-b1fe-519a4e3d87f0" class="bulleted-list"><li style="list-style-type:circle">Lösung: Meeting mit Serverteam → Mein User wird aus der DB gelöscht und ich erstellt manuell einen neuen</li></ul></li></ul><ul id="f34bde71-c996-48ea-967c-a5b83402a971" class="bulleted-list"><li style="list-style-type:disc">Manuelles Einloggen funktionert, einloggen über die GUI endet in Responsecode 400 und 401<ul id="cda7032d-9c29-4d67-883e-0656a73d60a7" class="bulleted-list"><li style="list-style-type:circle">Lösung: Auswerten des Responsecodes, printen der JSON Data um ggf. Unterschiede festzustellen → Kein Ergebniss</li></ul></li></ul><ul id="e447ffff-3c50-4931-9438-1aa259b51a28" class="bulleted-list"><li style="list-style-type:disc">JSON Data<ul id="5077cfcd-13c3-4833-b020-22cf5a589c68" class="bulleted-list"><li style="list-style-type:circle">Wenn ich die Userdaten in GUI eingebe und mich damit einlogge bekomme ich response 400, wenn ich sie mit meinen Userdaten die ich manuell eingebe vergleiche sind sie gleich und mit denen kann ich mich einloggen</li></ul><ul id="636f7b39-9993-4ca2-aec8-316489946bf6" class="bulleted-list"><li style="list-style-type:circle">Lösung: Der REST API Call requests.post(url, json=data) braucht als Data gar keinen json string sondern ein dictioinary. Die Transform2JsonData Methode musste also geändert werden</li></ul><pre id="76eea5a6-6158-44bb-bc96-63a8a0c2e1c2" class="code"><code>JSON data is same
+&lt;Response [400]&gt;
+{&quot;username&quot;: &quot;nico&quot;, &quot;password&quot;: &quot;654321&quot;}</code></pre></li></ul><h1 id="b2168627-2ced-4440-97fd-442320d34df5" class="">Woche 5 [01.05.2023 - 08.05.2023]</h1><p id="f56d514c-588a-4058-82f8-3e2cf0ee4391" class="">
+</p><table id="fc0b8fb2-a146-4a3d-a6ad-f7c3930fc52a" class="simple-table"><tbody><tr id="c141b62b-7d2e-4880-96e1-c16a54906338"><td id=":wz}" class="" style="width:95.65625px">Datum</td><td id="&lt;`dL" class="" style="width:529.65625px">Tätigkeit</td><td id="m]Vf" class="" style="width:69.65625px">Dauer</td></tr><tr id="60d5fdb3-646a-4584-b95a-f2040e1eb84c"><td id=":wz}" class="" style="width:95.65625px">02.05.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Gruppenmeeting → Weiteres besprechen der Spiellogik</td><td id="m]Vf" class="" style="width:69.65625px">1,0 h</td></tr><tr id="7161b675-ea7f-473e-8628-83c4e0470571"><td id=":wz}" class="" style="width:95.65625px">03.05.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">SocketIO erste Schritte → Connect, Disconnect, create und join game</td><td id="m]Vf" class="" style="width:69.65625px">2,0 h</td></tr><tr id="d6228490-34b5-4060-bf9a-eb178b4224b6"><td id=":wz}" class="" style="width:95.65625px">05.05.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">GitHub Dokumentation → Einlesen in Events und Payloads</td><td id="m]Vf" class="" style="width:69.65625px">0,75 h</td></tr><tr id="76f4827c-eb75-4677-aebb-0bb542ecd12e"><td id=":wz}" class="" style="width:95.65625px">07.05.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">GitHub Dokumentation 2 → Einlesen in Acknoledgements und Endpoints.ms</td><td id="m]Vf" class="" style="width:69.65625px">0,75 h</td></tr><tr id="25c9d17c-d280-4627-a2be-afe32f7f8ac0"><td id=":wz}" class="" style="width:95.65625px"></td><td id="&lt;`dL" class="" style="width:529.65625px"></td><td id="m]Vf" class="" style="width:69.65625px">4,5 h</td></tr></tbody></table><p id="8ac9ff3d-98b2-487e-b89c-86c9865d6bb6" class="">Probleme und Lösungen</p><ul id="56d7cba1-4e79-4bb6-a31d-9fa216f613b2" class="bulleted-list"><li style="list-style-type:disc">SocketIO Connect Namespace Problem:<ul id="01ac9ade-0379-4455-b119-31ec93d8c848" class="bulleted-list"><li style="list-style-type:circle">Lösung: Hilfe durch Jan → Gemeinsames ausprobieren verschiedener Parameteränderungen</li></ul><ul id="f6de302c-b00f-4f8d-b44e-0bda94561950" class="bulleted-list"><li style="list-style-type:circle">Bei Connect ist die Namespace verwendung mit einheitlichen Anführungsstrichen sehr entscheidend</li></ul><pre id="168fdee8-c5fa-4692-b328-036d77716b0a" class="code"><code>(&quot;https://nope-server.azurewebsites.net&quot;, namespaces=&quot;/&quot;, auth={&quot;token&quot;: access_token})</code></pre></li></ul><ul id="f02f29e9-e757-44d4-a6ce-59ad9d1f3478" class="bulleted-list"><li style="list-style-type:disc">Dokumentationsprobleme<ul id="a041ee53-1c67-4fbf-8ad7-fea208ef04c0" class="bulleted-list"><li style="list-style-type:circle">Einlesen in die Doku ist teilweise schwierig, da keine Einheitliche Struktur verwendet wurde → Infos befinden sich in 2 Repos, diese sind nicht logisch auf dem Discord verlinkt. Responses und Statuscodes werden definiert, ob man in SocketIO einen call oder Emit verwenden soll nicht</li></ul><ul id="8780909c-c018-4e89-8dda-aea168000348" class="bulleted-list"><li style="list-style-type:circle">Lösung → “Meeting” mit dem Ersteller der Dokumentation → Klärung von Unklarheiten und Fragen</li></ul></li></ul><h1 id="e5403088-6330-4483-b57d-bbbebdb2d519" class="">Woche 6 [09.05.2023 - 14.05.2023]</h1><table id="6771da38-f73f-493d-b7bc-34803dd0a7cf" class="simple-table"><tbody><tr id="d20882ea-fb8f-4c37-9fd9-1ca512b3cb24"><td id=":wz}" class="" style="width:95.65625px">Datum</td><td id="&lt;`dL" class="" style="width:529.65625px">Tätigkeit</td><td id="m]Vf" class="" style="width:69.65625px">Dauer</td></tr><tr id="301282bb-9530-4389-a97c-d0d8caa0c58d"><td id=":wz}" class="" style="width:95.65625px">09.05.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Online Gruppenmeeting → Besprechung des Fortschritts und Prototypentests</td><td id="m]Vf" class="" style="width:69.65625px">1,0 h</td></tr><tr id="47bb6052-e2ab-4cfb-9580-19b2618dda68"><td id=":wz}" class="" style="width:95.65625px">11.05.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Bugfixing von join:tournament </td><td id="m]Vf" class="" style="width:69.65625px">1,0 h</td></tr><tr id="73b6d197-c835-4b81-bfb4-ab6bf8016863"><td id=":wz}" class="" style="width:95.65625px">13.05.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Implementierung von socket.on Funktionen (List, Info, Tunier und Spiel State|Info)</td><td id="m]Vf" class="" style="width:69.65625px">2,0 h</td></tr><tr id="8ddbe19e-8665-4459-b561-be7b14997595"><td id=":wz}" class="" style="width:95.65625px">14.05.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Match Invite Problem</td><td id="m]Vf" class="" style="width:69.65625px">1,0 h</td></tr><tr id="10c688d7-37cb-4db7-92c4-e41ecdefafe1"><td id=":wz}" class="" style="width:95.65625px"></td><td id="&lt;`dL" class="" style="width:529.65625px"></td><td id="m]Vf" class="" style="width:69.65625px">5,0 h</td></tr></tbody></table><p id="c5c65370-d139-4a77-911b-4d5a82b10db9" class="">Probleme und Lösungen:</p><ul id="90cc9ca1-bfdd-4550-b9e4-a4fc7cc68755" class="bulleted-list"><li style="list-style-type:disc">Join Tournament:<ul id="bf2172f3-861a-4d94-9e30-d0c5dc6f6ad8" class="bulleted-list"><li style="list-style-type:circle">SocketIO Python hat sich verändert → socket.on hat seit diese Woche andere Paramter → 2 statt 1 → Guide und Doku durchlesen</li></ul><ul id="b41f7282-b21d-40dd-af47-3a390dc4ff4b" class="bulleted-list"><li style="list-style-type:circle">Abstimmen mit weiteren Komilitonen, die Python nutzen</li></ul><ul id="0999234a-af97-4661-8687-54cc1a142e9c" class="bulleted-list"><li style="list-style-type:circle">Schwierig zu findener Bug, da nur in python diese Änderung von socket.on gemacht wurde. Man geht eigentlich nicht davon aus, dass im Projekt die Libary oder das Framework verändert</li></ul></li></ul><ul id="7ab6d3c0-0da1-43c4-9535-b6713c022867" class="bulleted-list"><li style="list-style-type:disc">Match Invite <ul id="d90f2db5-4712-4676-96ee-c64d8b6855f5" class="bulleted-list"><li style="list-style-type:circle">Python ermöglicht anscheinend in socketIO keine Acknowledgements bei Emits an mehrere Clients → Matchinvite kann in python so nicht implementiert werden</li></ul><ul id="6c4b2527-a1bb-4429-a945-7ca8d51722ee" class="bulleted-list"><li style="list-style-type:circle">Absprache mit betroffenen Python Nutzern → Gemeinsame Lösungssuche</li></ul><ul id="4b44de8a-227f-42e4-bfd1-fa4098fe60b4" class="bulleted-list"><li style="list-style-type:circle">Wahrscheinlich werde ich die Sprache wecheln müssen, um dieses Feature zu nutzen</li></ul></li></ul><h1 id="59217921-d909-4718-a0a6-4da3cc6ad775" class="">Woche 7 [15.05.2023 - 21.05.2023]</h1><table id="6caa172c-3154-4592-9a51-4c37d51c3af8" class="simple-table"><tbody><tr id="25fce99a-83f6-4dba-96b0-4a536e1f0b1c"><td id=":wz}" class="" style="width:95.65625px">Datum</td><td id="&lt;`dL" class="" style="width:529.65625px">Tätigkeit</td><td id="m]Vf" class="" style="width:69.65625px">Dauer</td></tr><tr id="6e9c96b3-3450-4380-8d6d-33976c3a3459"><td id=":wz}" class="" style="width:95.65625px">15.05.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">KI Spieler pseudocode und planung </td><td id="m]Vf" class="" style="width:69.65625px">2,5 h</td></tr><tr id="08aa7957-d6c2-4a33-b084-b7c7d14a7592"><td id=":wz}" class="" style="width:95.65625px">16.05.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Prototypvorstellung</td><td id="m]Vf" class="" style="width:69.65625px">1,5 h</td></tr><tr id="bfbf1ebc-0228-4eb0-a076-1788bbf41357"><td id=":wz}" class="" style="width:95.65625px">19.05.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Implementierung von sio_events.py</td><td id="m]Vf" class="" style="width:69.65625px">3,0 h</td></tr><tr id="37d1fe9a-1896-478f-9571-233d4362f334"><td id=":wz}" class="" style="width:95.65625px"></td><td id="&lt;`dL" class="" style="width:529.65625px"></td><td id="m]Vf" class="" style="width:69.65625px"></td></tr><tr id="ae323c53-34b8-45b4-955c-e99d4043385e"><td id=":wz}" class="" style="width:95.65625px"></td><td id="&lt;`dL" class="" style="width:529.65625px"></td><td id="m]Vf" class="" style="width:69.65625px">6,0 h</td></tr></tbody></table><p id="68dcc76b-6309-4a40-a76a-843b91a47a27" class="">Implementieren von sio_events:</p><ul id="5c34cdbb-fedd-48d3-9469-973fce02d75a" class="bulleted-list"><li style="list-style-type:disc">Analyse der Anforderungen und Spezifikationen für sio_events.py</li></ul><ul id="5105f199-5cf2-48e8-8f64-7a0c30bc6f26" class="bulleted-list"><li style="list-style-type:disc">Erstellung des Dateischemas und der Funktionsstruktur für sio_events.py</li></ul><ul id="daac17b5-03d5-47f7-81c9-6f45dce26710" class="bulleted-list"><li style="list-style-type:disc">Implementierung der Funktionen für die Socket.IO-Events</li></ul><ul id="6ffa664a-3b3b-4642-b855-29372928cf3b" class="bulleted-list"><li style="list-style-type:disc">Testen und Debuggen der Funktionalität von sio_events.py</li></ul><p id="8c88e8bd-60cf-490b-a3dc-add3292edbbe" class="">Probleme/Herausforderungen:</p><ul id="95a0fae8-36dc-40fe-9aa5-3c8980ac7fe6" class="bulleted-list"><li style="list-style-type:disc">Ein Problem, das aufgetreten ist, besteht darin, dass die Funktionen für die Socket.IO-Events einen zweiten Parameter benötigen, der die Daten enthält. → Lösung durch socketIO Dokumentation</li></ul><h1 id="b1db63af-4f2a-45c7-951c-610ac29addba" class="">Woche 8 [22.05.2023 - 28.05.2023]</h1><table id="e013c664-edd0-4b1d-87d3-604a1093ed05" class="simple-table"><tbody><tr id="6797b568-85d8-4044-a786-52b650c54ae5"><td id=":wz}" class="" style="width:95.65625px">Datum</td><td id="&lt;`dL" class="" style="width:529.65625px">Tätigkeit</td><td id="m]Vf" class="" style="width:69.65625px">Dauer</td></tr><tr id="077c42fe-954a-4de1-8dd0-5ba0b509bd28"><td id=":wz}" class="" style="width:95.65625px">22.05.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Implementierung von MatchingColor</td><td id="m]Vf" class="" style="width:69.65625px">1,0 h</td></tr><tr id="19b50f45-28c0-4863-9e61-faffce26fef7"><td id=":wz}" class="" style="width:95.65625px">22.05.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Implementierung von MatchingCards</td><td id="m]Vf" class="" style="width:69.65625px">1,0 h</td></tr><tr id="3762a10d-b1d4-43e6-8569-4c3437f2b085"><td id=":wz}" class="" style="width:95.65625px">25.05.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Implementierung von PossibleSets und get_moves</td><td id="m]Vf" class="" style="width:69.65625px">3,0 h</td></tr><tr id="fb25bb3f-4853-47ed-a395-6e447ab62ab9"><td id=":wz}" class="" style="width:95.65625px"></td><td id="&lt;`dL" class="" style="width:529.65625px"></td><td id="m]Vf" class="" style="width:69.65625px"></td></tr><tr id="9926d466-d6b2-4889-a778-c8fe184ff826"><td id=":wz}" class="" style="width:95.65625px"></td><td id="&lt;`dL" class="" style="width:529.65625px"></td><td id="m]Vf" class="" style="width:69.65625px">5,0 h</td></tr></tbody></table><p id="c0ba404e-7ccd-4d35-84d9-358dc9cbcf5d" class="">Implementierung von game_rules.py</p><ul id="d0b4c5b6-a62b-4b52-aa4f-da4385d64c6c" class="bulleted-list"><li style="list-style-type:disc">Implementierung der Funktion &quot;MatchingCards&quot; für die Kartenübereinstimmung</li></ul><ul id="b687c97a-9351-47db-8444-6a666b3ddfb8" class="bulleted-list"><li style="list-style-type:disc">Implementierung der Funktion &quot;MatchingColor&quot; für die Farbübereinstimmung</li></ul><ul id="44d1d983-1ed3-4f7d-be6f-d85cb00490cd" class="bulleted-list"><li style="list-style-type:disc">Implementierung der Funktion &quot;PossibleSets&quot; für die Ermittlung möglicher Kartensets</li></ul><ul id="9458051e-b4d8-46a6-9afa-36cecb6b8aa0" class="bulleted-list"><li style="list-style-type:disc">Implementierung der Funktion &quot;GameMove&quot; für die Spielzüge und Spiellogik</li></ul><ul id="e5de00b0-151f-4aef-95c4-f68e7f5d87eb" class="bulleted-list"><li style="list-style-type:disc">Testen und Debuggen der Funktionalität von game_rules.py</li></ul><p id="faff7528-fb2e-450c-8fbe-28ac13db8d6d" class="">Probleme/Herausforderungen:</p><ul id="a39e9dc1-6daf-4dd7-996e-68a2ace0df54" class="bulleted-list"><li style="list-style-type:disc">Setbuilding mit Jokerkarten, da typeUnterschiede</li></ul><ul id="408bec5c-05c4-44d3-99a0-d1642be76d9a" class="bulleted-list"><li style="list-style-type:disc">ActionKarten sollten nicht im Set, aber trotzdem als Zug gespielt werden können</li></ul><h1 id="33e7014b-8be8-4543-b293-c949e9bfcb57" class="">Woche 9 [29.05.2023 - 04.06.2023]</h1><table id="bf9dc3af-1316-4b52-815f-d304facc44ae" class="simple-table"><tbody><tr id="c621b7a8-6a67-4fef-8484-b6e4db1a55ce"><td id=":wz}" class="" style="width:95.65625px">Datum</td><td id="&lt;`dL" class="" style="width:529.65625px">Tätigkeit</td><td id="m]Vf" class="" style="width:69.65625px">Dauer</td></tr><tr id="42f32f87-0929-4144-9d42-24449ee09fb6"><td id=":wz}" class="" style="width:95.65625px">29.05.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Implementierung von NumberCards KI</td><td id="m]Vf" class="" style="width:69.65625px">2,0 h</td></tr><tr id="539dbcf0-5e75-4739-8f3f-1fb93390cd1c"><td id=":wz}" class="" style="width:95.65625px">31.05.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Implementierung von take() Funktion</td><td id="m]Vf" class="" style="width:69.65625px">0,5 h</td></tr><tr id="12504aaa-10a4-40c4-8171-f6471f7b5ea2"><td id=":wz}" class="" style="width:95.65625px">31.05.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Implementierung von move_utility() Funktion</td><td id="m]Vf" class="" style="width:69.65625px">1,0 h</td></tr><tr id="f3779cde-d3cc-4c88-a8b8-bfeb85da3785"><td id=":wz}" class="" style="width:95.65625px">01.06.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">BestSet-Bestimmung und berechnung</td><td id="m]Vf" class="" style="width:69.65625px">1,5 h</td></tr><tr id="17b7db31-b2d0-4309-a33d-0e0db50b7a7a"><td id=":wz}" class="" style="width:95.65625px"></td><td id="&lt;`dL" class="" style="width:529.65625px"></td><td id="m]Vf" class="" style="width:69.65625px">5,0 h</td></tr></tbody></table><p id="5035bbf5-8e3c-4e11-a65d-d153443ef78c" class="">Implementierung von ki_spieler.py</p><ol type="1" id="02860bbb-c35e-43bc-97e6-5985ddf02df4" class="numbered-list" start="1"><li>Implementierung der Funktion &quot;NumberCards&quot; für die KI-Strategie basierend auf Zahlenkarten</li></ol><ol type="1" id="c2f16e1a-0b75-4623-8da2-0d0dc0b4d90f" class="numbered-list" start="2"><li>Implementierung der Funktion &quot;take&quot; für den &quot;Take&quot;-Zug → Nope wenn Take letzter Zug</li></ol><ol type="1" id="c5ac503a-5d91-46c0-800e-98dfa6c74f19" class="numbered-list" start="3"><li>Implementierung der Funktion &quot;move_utility&quot; zur Berechnung des Nutzens eines Spielzugs</li></ol><ol type="1" id="4d2220c8-37ba-4995-8b06-674e5a05cbcb" class="numbered-list" start="4"><li>Implementierung der Logik zur Bestimmung des besten Sets basierend auf Nutzwert und Spielregeln</li></ol><p id="67ca0baf-547d-44db-aa4f-274dabce9149" class="">Probleme/Herausforderungen:</p><ul id="1978dd6e-8fac-4c0f-8f0c-a2a69bd54065" class="bulleted-list"><li style="list-style-type:disc">Das beste Set zu bestimmen, basierend auf dem Nutzwert und den Spielregeln. Es erfordert eine sorgfältige Analyse der verfügbaren Karten und deren Kombinationsmöglichkeiten, um die beste Entscheidung zu treffen. Oft gibt es “Edge” Cases bei denen eine falsche Entscheidung getroffen wird, das führt zur disqualifizierung</li></ul><h1 id="bfa56b2c-bc11-4318-baa4-b04b472d38f5" class="">Woche 10 [05.06.2023 - 11.06.2023]</h1><table id="9a4caa19-6f13-4255-95c1-337e87df8100" class="simple-table"><tbody><tr id="f2f8e1a8-b54d-4ee3-9fca-552badc49d18"><td id=":wz}" class="" style="width:95.65625px">Datum</td><td id="&lt;`dL" class="" style="width:529.65625px">Tätigkeit</td><td id="m]Vf" class="" style="width:69.65625px">Dauer</td></tr><tr id="8cea79af-1774-45f8-8cb8-7f617d5cd663"><td id=":wz}" class="" style="width:95.65625px">06.06.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Implementierung von ki_spieler.py für Aktionskarten</td><td id="m]Vf" class="" style="width:69.65625px">2,0 h</td></tr><tr id="827f8e44-cf0d-41de-9b72-053da99f7033"><td id=":wz}" class="" style="width:95.65625px">08.06.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Beheben von Edge Cases in ki_spieler.py, Debugging und Fehlerbehebung</td><td id="m]Vf" class="" style="width:69.65625px">2,0 h</td></tr><tr id="55b36c68-b383-4ffc-9557-9ff0b869c496"><td id=":wz}" class="" style="width:95.65625px">09.06.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Beheben von Edge Cases in ki_spieler.py, Debugging und Fehlerbehebung</td><td id="m]Vf" class="" style="width:69.65625px">3,0 h</td></tr><tr id="7404439b-7cc5-4413-919c-90323a4661e1"><td id=":wz}" class="" style="width:95.65625px"></td><td id="&lt;`dL" class="" style="width:529.65625px"></td><td id="m]Vf" class="" style="width:69.65625px"></td></tr><tr id="dca98ce0-d637-4c55-a81c-520cb461a10a"><td id=":wz}" class="" style="width:95.65625px"></td><td id="&lt;`dL" class="" style="width:529.65625px"></td><td id="m]Vf" class="" style="width:69.65625px">7,0 h</td></tr></tbody></table><p id="208e43f0-5698-4497-a07a-44f953cabb9a" class="">Implementierung von Aktionskarten</p><ol type="1" id="f3a575f2-8fde-4185-bf72-4d26ffe3ad26" class="numbered-list" start="1"><li>Erweiterung der Funktionen in ki_spieler.py für den Umgang mit Aktionskarten</li></ol><ol type="1" id="a7d8ce46-bd0b-4714-a79a-c65cacea76c1" class="numbered-list" start="2"><li>Identifizierung und Behebung von Edge Cases, die bei der Verwendung von Aktionskarten auftreten können</li></ol><ol type="1" id="f900885c-b485-449d-9be4-31f2e68867ad" class="numbered-list" start="3"><li>Debugging und Fehlerbehebung in ki_spieler.py, um eine fehlerfreie Ausführung der KI-Logik sicherzustellen</li></ol><ol type="1" id="fc612446-6ae7-4718-9171-173c39e8efc2" class="numbered-list" start="4"><li>Durchführung von umfangreichen Tests, um die Funktionalität und Zuverlässigkeit der KI zu gewährleisten</li></ol><ol type="1" id="cf3ad90f-7e89-46c5-8405-63ecd77302eb" class="numbered-list" start="5"><li>Korrekturen und Anpassungen basierend auf den Testergebnissen</li></ol><p id="c8203afe-24f1-4342-b3fc-ea2909d570c9" class="">Probleme/Herausforderungen:</p><ul id="ffb1d2f4-f49f-4f8e-a8b8-67a8c813a6db" class="bulleted-list"><li style="list-style-type:disc">Edge Cases und Bugs zeigten fehler in game_rules.py. Alle Funtkionen der game_rules mussten für Atkionskarten angepasst werden. Das dauerte sehr lange und war mühselig zu testen</li></ul><h1 id="3f816e80-4acf-4768-9690-6a28810de2bb" class="">Woche 11 [12.05.2023 - 18.05.2023]</h1><table id="15dc4c4d-ee07-42aa-a6d3-d686a019a993" class="simple-table"><tbody><tr id="fe50192d-9b91-4a5a-a1b3-29033572fe09"><td id=":wz}" class="" style="width:95.65625px">Datum</td><td id="&lt;`dL" class="" style="width:529.65625px">Tätigkeit</td><td id="m]Vf" class="" style="width:69.65625px">Dauer</td></tr><tr id="f872a1da-58bb-449b-aebd-bf7dfec3ec07"><td id=":wz}" class="" style="width:95.65625px">12.05.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Bugfixing und Fehlerbehebung in ki_spieler.py</td><td id="m]Vf" class="" style="width:69.65625px">2,5 h</td></tr><tr id="e0d4c269-6595-4cf5-b23f-e28b41f168b1"><td id=":wz}" class="" style="width:95.65625px">12.05.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Vorbereitung und Teilnahme an einem Turnier mit anderen Studenten</td><td id="m]Vf" class="" style="width:69.65625px">1,5 h</td></tr><tr id="1ed0a767-46a5-45a5-bbe6-5281ee42ea76"><td id=":wz}" class="" style="width:95.65625px">12.05.2023</td><td id="&lt;`dL" class="" style="width:529.65625px">Erstellung der Markdown-Dokumentation für das Projekt</td><td id="m]Vf" class="" style="width:69.65625px">2,0 h</td></tr><tr id="74c5ac99-dadc-4d53-8620-a7d483182dc6"><td id=":wz}" class="" style="width:95.65625px"></td><td id="&lt;`dL" class="" style="width:529.65625px"></td><td id="m]Vf" class="" style="width:69.65625px"></td></tr><tr id="efd3d626-67b6-4c3e-adb9-0638af41f6c5"><td id=":wz}" class="" style="width:95.65625px"></td><td id="&lt;`dL" class="" style="width:529.65625px"></td><td id="m]Vf" class="" style="width:69.65625px">6,0 h</td></tr></tbody></table><ol type="1" id="3b67f2b9-c508-4e56-8284-46f706001e84" class="numbered-list" start="1"><li>Identifizierung und Behebung von Fehlern und Bugs in ki_spieler.py, um die Stabilität und Funktionalität der KI zu verbessern</li></ol><ol type="1" id="6a1b63bd-beef-4fec-8209-c4d36d5ef61d" class="numbered-list" start="2"><li>Aktualisierung der Markdown-Dokumentation mit aktuellen Informationen zum Projekt, den implementierten Funktionen und der Verwendung der Software</li></ol><ol type="1" id="340a3d9c-a2db-4dca-88ca-535cae2ab168" class="numbered-list" start="3"><li> Teilnahme an Turnier mit anderen Studenten</li></ol><h1 id="dd1e99b0-84ef-46f7-a72a-45a73f74b374" class="">Gesamtstunden</h1><table id="853105dd-fee1-4f68-9962-7949f0aa88d6" class="simple-table"><tbody><tr id="2e86d825-23c8-416e-800a-0f45033ca103"><td id=":wz}" class="" style="width:95.65625px">Woche</td><td id="&lt;`dL" class="" style="width:529.65625px">Tätigkeit</td><td id="m]Vf" class="" style="width:69.65625px">Dauer</td></tr><tr id="974bb824-a16a-4adc-97cf-93a077712bc8"><td id=":wz}" class="" style="width:95.65625px">1 und 2</td><td id="&lt;`dL" class="" style="width:529.65625px">Projekteinstieg</td><td id="m]Vf" class="" style="width:69.65625px">7,0 h</td></tr><tr id="fc2cf94a-23b1-4b7d-9cdf-eef0fbdb9cbd"><td id=":wz}" class="" style="width:95.65625px">3</td><td id="&lt;`dL" class="" style="width:529.65625px">GUI und Login</td><td id="m]Vf" class="" style="width:69.65625px">6,0 h</td></tr><tr id="bf169d34-1519-4fa3-a663-64817d950976"><td id=":wz}" class="" style="width:95.65625px">4</td><td id="&lt;`dL" class="" style="width:529.65625px">GUI und Login</td><td id="m]Vf" class="" style="width:69.65625px">4,5 h</td></tr><tr id="49730e40-d6a5-4746-a879-b1b88008967c"><td id=":wz}" class="" style="width:95.65625px">5</td><td id="&lt;`dL" class="" style="width:529.65625px">SocketIO Doku, Spiellogik Planung</td><td id="m]Vf" class="" style="width:69.65625px">4,5 h</td></tr><tr id="16a4fa66-a768-4ad1-9054-114add69df61"><td id=":wz}" class="" style="width:95.65625px">6</td><td id="&lt;`dL" class="" style="width:529.65625px">Tournament Handling</td><td id="m]Vf" class="" style="width:69.65625px">5,0 h</td></tr><tr id="0414f5e2-c25c-4986-837f-189a80598551"><td id=":wz}" class="" style="width:95.65625px">7</td><td id="&lt;`dL" class="" style="width:529.65625px">Implementieren von sio_events, KI Spieler Plannung und Prototypvorstellung</td><td id="m]Vf" class="" style="width:69.65625px">6,0 h</td></tr><tr id="e7d05130-c732-449c-ad66-12f6513411ab"><td id=":wz}" class="" style="width:95.65625px">8</td><td id="&lt;`dL" class="" style="width:529.65625px">Implementierung von game_rules.py</td><td id="m]Vf" class="" style="width:69.65625px">5,0 h</td></tr><tr id="c8c91158-cdd2-4be4-a9d1-b5efe818b877"><td id=":wz}" class="" style="width:95.65625px">9</td><td id="&lt;`dL" class="" style="width:529.65625px">Implementierung von ki_spieler.py</td><td id="m]Vf" class="" style="width:69.65625px">5,0 h</td></tr><tr id="e2e48c97-e16b-4ab5-a208-13a9e2c36437"><td id=":wz}" class="" style="width:95.65625px">10</td><td id="&lt;`dL" class="" style="width:529.65625px">Implementierung von Aktionskarten</td><td id="m]Vf" class="" style="width:69.65625px">7,0 h</td></tr><tr id="2f05f790-5ad4-4edb-a934-0b94070053cb"><td id=":wz}" class="" style="width:95.65625px">11</td><td id="&lt;`dL" class="" style="width:529.65625px">Bugfixing und Dokumentation</td><td id="m]Vf" class="" style="width:69.65625px">6,0 h</td></tr><tr id="2ea81327-d981-4685-b8e9-dfb1ac324858"><td id=":wz}" class="" style="width:95.65625px"></td><td id="&lt;`dL" class="" style="width:529.65625px"></td><td id="m]Vf" class="" style="width:69.65625px"></td></tr><tr id="f9b40849-9fda-4589-89be-63efaeaf84a3"><td id=":wz}" class="" style="width:95.65625px"></td><td id="&lt;`dL" class="" style="width:529.65625px">Gesamt</td><td id="m]Vf" class="" style="width:69.65625px">56 h</td></tr></tbody></table><p id="4efb0c56-924c-4002-81c7-12b163ddf50f" class="">test</p></div></article></body></html>

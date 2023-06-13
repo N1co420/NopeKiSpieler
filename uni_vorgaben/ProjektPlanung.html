@@ -1,0 +1,706 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>ProjektPlanung und Dokumentation</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	padding-inline-start: 0;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.page-description {
+    margin-bottom: 2em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-interactiveBlue { background-color: rgba(35, 131, 226, .07); }
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-translucentGray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="057809f3-0dac-4440-89be-71617afc98a8" class="page sans"><header><img class="page-cover-image" src="https://www.notion.so/images/page-cover/webb1.jpg" style="object-position:center 50%"/><div class="page-header-icon page-header-icon-with-cover"><span class="icon">🗒️</span></div><h1 class="page-title">ProjektPlanung und Dokumentation</h1><p class="page-description"></p></header><div class="page-body"><p id="95bada71-3b01-4ea3-8a0e-18bb248c43d7" class=""><strong>Projektplan für Kartenspiel-Simulation</strong></p><ol type="1" id="f4548a67-ecc6-4ae6-8ab0-30959c28b2fe" class="numbered-list" start="1"><li><strong>Projektübersicht und Ziele:</strong><ul id="5e866d1d-b0f5-4b9c-bb3c-30775a4c06b5" class="bulleted-list"><li style="list-style-type:disc">Das Ziel des Projekts ist die Entwicklung einer Kartenspiel-Simulation, die es Benutzern ermöglicht, gegen KI-Spieler anzutreten oder an Turnieren teilzunehmen.</li></ul><ul id="25fd3b5e-ef16-4563-a38f-9f78af384b36" class="bulleted-list"><li style="list-style-type:disc">Das Hauptziel besteht darin, eine fähige KI zu implementieren.</li></ul></li></ol><ol type="1" id="e021e17b-d6f8-4bf7-86e5-e97b1aef1a14" class="numbered-list" start="2"><li><strong>Funktionsanforderungen:</strong><ul id="2d618ad9-43b8-49f3-9aa9-4e0b50404e57" class="bulleted-list"><li style="list-style-type:disc">Implementierung eines Hauptmenüs für Benutzerinteraktionen und Spieloptionen.</li></ul><ul id="3e0dd239-e1f5-4d48-8b54-3499d55564ae" class="bulleted-list"><li style="list-style-type:disc">Entwicklung der Spielregeln und der Logik für Kartenbewegungen und Spielzüge.</li></ul><ul id="d5f86a42-78c1-4ce6-b29b-bd921cd6ea20" class="bulleted-list"><li style="list-style-type:disc">Integration von KI-Spieler mit eigenen Strategien.</li></ul><ul id="0358f143-29a3-4ec6-a123-8a7a3b6f202e" class="bulleted-list"><li style="list-style-type:disc">Implementierung der Kommunikation mit einem Server für Turniermanagement und Spielerstatistiken.</li></ul></li></ol><ol type="1" id="a3055f8d-171c-496c-9665-689313841f36" class="numbered-list" start="3"><li><strong>Dateistruktur und Modulplanung:</strong><ul id="c760f37f-7658-4423-b3bc-ecdc83792e78" class="bulleted-list"><li style="list-style-type:disc">Dateien im &quot;src&quot;-Ordner:<ul id="ae1e221e-854a-46e5-a864-7848111627e5" class="bulleted-list"><li style="list-style-type:circle"><code>main_menu.py</code>: Hauptdatei für das Hauptmenü und die Benutzerinteraktion.</li></ul><ul id="ed500be0-217d-483d-a28b-ba4c738e27dc" class="bulleted-list"><li style="list-style-type:circle"><code>game_rules.py</code>: Enthält die Spielregeln und die Logik für Kartenbewegungen.</li></ul><ul id="e21cb12e-ad3d-411c-bb9b-ec01a0b1014f" class="bulleted-list"><li style="list-style-type:circle"><code>ki_spieler.py</code>: Implementierung von KI-Spielern mit verschiedenen Strategien.</li></ul><ul id="e9c249bb-a3eb-4e5e-a222-3797a1e58fb0" class="bulleted-list"><li style="list-style-type:circle"><code>payload_builder.py</code>: Hilfsmodul zum Erstellen von Spielzügen und Payloads.</li></ul><ul id="059ff6a2-1b56-4e7e-8dbd-c75b64d150e3" class="bulleted-list"><li style="list-style-type:circle"><code>sio_events.py</code>: Behandlung von Socket.IO-Ereignissen für die Serverkommunikation.</li></ul><ul id="fd40e99d-7e20-40c5-936b-5584585ea1cd" class="bulleted-list"><li style="list-style-type:circle"><code>rest_api.py</code>: Verbindung und Kommunikation mit dem Server über eine REST-API.</li></ul><ul id="d2bd42a4-2415-45e5-8b69-b2d5efcb0f59" class="bulleted-list"><li style="list-style-type:circle"><code>tournament_handler.py</code>: Verwaltung von Turnieren, Spielrunden und Spielerstatistiken.</li></ul></li></ul><ul id="624fbf97-c300-4af8-90f8-3c85fa87d3de" class="bulleted-list"><li style="list-style-type:disc">Dokumentation durch Markdown Files </li></ul></li></ol><ol type="1" id="984ba45a-1947-4065-92af-c2ea0ba145c5" class="numbered-list" start="4"><li><strong>Funktionslogik und Pseudocode:</strong><p id="1e36ebad-cfe3-4925-9833-a1784f8b2195" class="">a) <code>main_menu.py</code></p><ul id="2bd9b497-d04a-4058-88a1-2432de2edfaf" class="bulleted-list"><li style="list-style-type:disc">Funktion <code>mainMenu()</code>:<ul id="f0056d34-e414-44db-aa77-a4d08e5fe30d" class="bulleted-list"><li style="list-style-type:circle">Stellt eine Verbindung zum Server her und zeigt das Hauptmenü an.</li></ul><ul id="87cfb7db-bf70-486f-930e-80556579f2c0" class="bulleted-list"><li style="list-style-type:circle">Verarbeitet die Benutzereingabe und ruft die entsprechenden Funktionen auf, basierend auf der Auswahl.</li></ul><pre id="b55cf3b5-fefa-44bf-8a72-656bc80e2f89" class="code"><code>Funktion mainMenu():
+    Verbinde mit dem Server
+    Wiederhole, bis das Spiel beendet wird:
+        Zeige das Hauptmenü an
+        Verarbeite die Benutzereingabe:
+            Wenn die Auswahl &quot;q&quot; ist:
+                Erfrage die Anzahl der Spiele vom Benutzer
+                Erstelle das Turnier mit der angegebenen Anzahl von Spielen
+            Wenn die Auswahl &quot;w&quot; ist:
+                Erfrage die Turnier-ID vom Benutzer
+                Tritt dem Turnier mit der angegebenen ID bei
+            Wenn die Auswahl &quot;e&quot; ist:
+                Starte das aktuelle Turnier
+                Wenn das Turnier erfolgreich gestartet wurde:
+                    Zeige eine Erfolgsmeldung an
+            Wenn die Auswahl &quot;r&quot; ist:
+                Verlasse das aktuelle Turnier
+            Wenn die Auswahl &quot;t&quot; ist:
+                Trenne die Verbindung zum Server und beende das Spiel
+            Sonst:
+                Zeige eine Fehlermeldung an</code></pre></li></ul><p id="58c90ee2-a7ea-4b5d-be50-ff9212d6539a" class="">b) <code>game_rules.py</code></p><ul id="b5dc3467-4dbb-4987-bcde-19a10cb295f4" class="bulleted-list"><li style="list-style-type:disc">Funktionen zur Spielregel-Logik:<ul id="5d3826af-8561-4853-8d1e-0494456f1e01" class="bulleted-list"><li style="list-style-type:circle"><code>get_matching_cards()</code>: Ermittelt Karten, die zu einer bestimmten Karte passen.</li></ul><ul id="f2c70e29-c775-4637-bc3a-4a01d898945f" class="bulleted-list"><li style="list-style-type:circle"><code>get_moves()</code>: Ermittelt mögliche Spielzüge basierend auf den verfügbaren Karten.</li></ul><ul id="03ba3ac0-9cba-4f5c-b599-75b8070fc871" class="bulleted-list"><li style="list-style-type:circle"><code>calculate_move_utility()</code>: Berechnet die Nützlichkeit eines Spielzugs basierend auf der aktuellen Spielsituation.</li></ul><pre id="22a0a879-9bd1-4c9c-98b9-87ac5d2afa6b" class="code"><code>Funktion get_matching_cards(hand, topCard, only_action_cards):
+    ...
+
+Funktion get_moves(matching_cards, topCard):
+    ...
+
+Funktion calculate_move_utility(move, top_card_value):
+    ...</code></pre></li></ul><p id="b01e5c28-f8d0-4d34-8c4d-0d5b68404b03" class="">c) <code>ki_spieler.py</code></p><ul id="aa0da59e-8513-4d77-a093-1f4d63b62d3c" class="bulleted-list"><li style="list-style-type:disc">Funktionen zur KI-Spieler-Logik:<ul id="842aea0c-09f8-475b-99ec-0a229608906b" class="bulleted-list"><li style="list-style-type:circle"><code>kiPlayerNumbers()</code>: Bestimmt den Spielzug eines KI-Spielers basierend auf Zahlenstrategien.</li></ul><ul id="dc14b556-970e-4e6d-adc9-b47d08b1a704" class="bulleted-list"><li style="list-style-type:circle"><code>kiPlayerAll()</code>: Bestimmt den Spielzug eines KI-Spielers basierend auf der Strategie, alle Karten zu nutzen.</li></ul><pre id="66adf831-b46d-419a-9987-8a764df1728d" class="code"><code>Funktion kiPlayerNumbers(hand, topCard):
+    ...
+
+Funktion kiPlayerAll(hand, topCard, lastTopCard):
+    ...</code></pre></li></ul><p id="d6fa42e9-a99d-453a-a5b8-37fe40e96cd1" class="">d) Weitere Module wie <code>payload_builder.py</code>, <code>sio_events.py</code>, <code>rest_api.py</code> und <code>tournament_handler.py</code></p><ul id="941e1160-17b8-4c16-977a-e08437db1b44" class="bulleted-list"><li style="list-style-type:disc">Diese werden in Abstimmung mit der Server-planung implementiert werden</li></ul><p id="38ce8c25-fc64-4572-b429-7dac024276cf" class="">
+</p></li></ol></div></article></body></html>
